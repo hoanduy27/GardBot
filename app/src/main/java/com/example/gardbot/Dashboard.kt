@@ -41,4 +41,7 @@ class Dashboard : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+    companion object{
+        fun newInstance(): Dashboard = Dashboard()
+    }
 }

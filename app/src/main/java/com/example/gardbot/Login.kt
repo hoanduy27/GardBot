@@ -8,6 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.gardbot.databinding.FragmentLoginBinding
@@ -27,14 +30,20 @@ class Login : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this){
+            //TODO - not yet implemented: press back button 2 times to exit
+        }
+    }
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
 
     ): View? {
+
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,14 +56,18 @@ class Login : Fragment() {
             //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
         binding.txtNoaccount.setOnClickListener{
+            Log.e("CurrentFragment", this.toString())
             findNavController().navigate(R.id.action_login_to_signup)
         }
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+
     private fun validateLogin(){
         val username = binding.txtboxUsername.text.toString()
         val password = binding.txtboxPassword.text.toString()
@@ -74,7 +87,8 @@ class Login : Fragment() {
                 Toast.makeText(context, stringToast, Toast.LENGTH_SHORT).show()
                 if(stringToast == "Đăng nhập thành công"){
                     Log.e("he", activity.toString())
-                    findNavController().navigate(R.id.action_login_to_dashboad)
+                    val intent = Intent(activity, MainActivity::class.java)
+                    startActivity(intent)
                 }
             }
 
@@ -85,5 +99,9 @@ class Login : Fragment() {
 
     private fun isPasswordMatches(userSnapshot: DataSnapshot, password: String) : Boolean{
         return (userSnapshot.child("password").value.toString() == password)
+    }
+
+    companion object{
+        fun newInstance() : Login = Login()
     }
 }

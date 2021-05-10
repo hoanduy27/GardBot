@@ -14,9 +14,6 @@
         <action
             android:id="@+id/action_login_to_signup"
             app:destination="@id/fragment_signup" />
-        <action
-            android:id="@+id/action_login_to_dashboad"
-            app:destination="@+id/fragment_dashboard"/>
     </fragment>
 
     <fragment
@@ -27,22 +24,6 @@
 
         <action
             android:id="@+id/action_signup_to_login"
-            app:destination="@id/fragment_login" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/fragment_dashboard"
-        android:name="com.example.gardbot.Dashboard"
-        android:label="@string/fragment_dashboard"
-        tools:layout="@layout/fragment_dashboard">
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/content_toolbar"
-        tools:layout="@layout/content_toolbar" >
-        <action
-            android:id="@+id/action_content_toolbar_to_fragment_login"
             app:destination="@id/fragment_login" />
     </fragment>
 
