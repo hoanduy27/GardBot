@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragment_login">
+
+    <fragment
+        android:id="@+id/fragment_login"
+        android:name="com.example.gardbot.Login"
+        android:label="@string/fragment_login"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_login_to_signup"
+            app:destination="@id/fragment_signup" />
+        <action
+            android:id="@+id/action_login_to_dashboad"
+            app:destination="@+id/fragment_dashboard"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_signup"
+        android:name="com.example.gardbot.SignUp"
+        android:label="@string/fragment_signup"
+        tools:layout="@layout/fragment_signup">
+
+        <action
+            android:id="@+id/action_signup_to_login"
+            app:destination="@id/fragment_login" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_dashboard"
+        android:name="com.example.gardbot.Dashboard"
+        android:label="@string/fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/content_toolbar"
+        tools:layout="@layout/content_toolbar" >
+        <action
+            android:id="@+id/action_content_toolbar_to_fragment_login"
+            app:destination="@id/fragment_login" />
+    </fragment>
+
+</navigation>

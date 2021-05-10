@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="50dp"
+    tools:context=".SignUp">
+
+    <TextView
+        android:id="@+id/txt_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="@string/txt_signup"
+        android:textSize="30sp" />
+    <EditText
+        android:id="@+id/txtbox_lname"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/txtbox_lname"
+        android:inputType="textPersonName" />
+    <EditText
+        android:id="@+id/txtbox_fname"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/txtbox_fname"
+        android:inputType="textPersonName" />
+    <EditText
+        android:drawableLeft="@drawable/ic_person"
+        android:drawablePadding="10dp"
+        android:id="@+id/txtbox_username"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/txtbox_username"
+        android:inputType="textPersonName" />
+    <EditText
+        android:drawableLeft="@drawable/ic_lock"
+        android:drawableStart="@drawable/ic_lock"
+        android:drawablePadding="10dp"
+        android:id="@+id/txtbox_password"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/txtbox_password"
+        android:inputType="textPassword" />
+    <EditText
+        android:drawableLeft="@drawable/ic_lock"
+        android:drawableStart="@drawable/ic_lock"
+        android:drawablePadding="10dp"
+        android:id="@+id/txtbox_rePassword"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/txtbox_rePassword"
+        android:inputType="textPassword" />
+    <EditText
+        android:id="@+id/txtbox_email"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/txtbox_email"
+        android:inputType="textEmailAddress" />
+    <EditText
+        android:id="@+id/txtbox_phoneNum"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/txtbox_phoneNum"
+        android:inputType="phone" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@color/buttonBackground"
+        android:text="@string/btn_signup" />
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@color/buttonBackground"
+        android:text="@string/btn_cancel" />
+</LinearLayout>

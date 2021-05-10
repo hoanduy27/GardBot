@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "504907023140",
+    "firebase_url": "https://garbbot-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "garbbot",
+    "storage_bucket": "garbbot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504907023140:android:1ff86b1444ae1ba01369b1",
+        "android_client_info": {
+          "package_name": "com.dadn.gardbot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "504907023140-i1dnkvfcfjhl43jmk9sk8opfnd0444li.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCLOzrGgG-wFRShbyc7IZ3xbdhTrqYaHc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "504907023140-i1dnkvfcfjhl43jmk9sk8opfnd0444li.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504907023140:android:5eb63781b474db341369b1",
+        "android_client_info": {
+          "package_name": "com.example.gardbot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "504907023140-i1dnkvfcfjhl43jmk9sk8opfnd0444li.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCLOzrGgG-wFRShbyc7IZ3xbdhTrqYaHc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "504907023140-i1dnkvfcfjhl43jmk9sk8opfnd0444li.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

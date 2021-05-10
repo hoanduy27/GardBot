@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Gardbot</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="fragment_login">Đăng nhập</string>
+    <string name="fragment_signup">Đăng ký tài khoản</string>
+    <string name="fragment_dashboard">Dashboard</string>
+
+
+    <string name="btn_login">Đăng nhập</string>
+    <string name="previous">Previous</string>
+
+    <string name="txt_login">Đăng nhập</string>
+    <string name="txtbox_username">Tên đăng nhập</string>
+    <string name="txtbox_password">Mật khẩu</string>
+
+    <string name="txt_signup">Đăng ký</string>
+    <string name="txtbox_rePassword">Nhập lại Mật khẩu</string>
+    <string name="txtbox_lname">Họ</string>
+    <string name="txtbox_fname">Tên</string>
+    <string name="txtbox_email">Email</string>
+    <string name="txtbox_phoneNum">Số điện thoại</string>
+    <string name="btn_signup">Đăng ký</string>
+    <string name="btn_cancel">Hủy</string>
+
+    <string name="txt_signout">Đăng xuất</string>
+
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="toast_button_text">Toast</string>
+    <string name="count_button_text">Count</string>
+    <string name="sign_up">Random betwwen 0 and %d</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txt_noaccount">Chưa có tài khoản? Đăng ký mới!</string>
+
+</resources>
