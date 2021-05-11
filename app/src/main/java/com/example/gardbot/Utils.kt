@@ -8,5 +8,6 @@ import android.content.Intent
 class Utils {
     companion object{
         //TODO: implement useful functions
+
     }
 }

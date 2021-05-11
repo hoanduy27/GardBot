@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.gardbot.databinding.FragmentLoginBinding
 import com.google.firebase.database.*
 import com.google.firebase.*
+import model.Session
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -57,7 +58,8 @@ class Login : Fragment() {
         }
         binding.txtNoaccount.setOnClickListener{
             Log.e("CurrentFragment", this.toString())
-            findNavController().navigate(R.id.action_login_to_signup)
+            /*findNavController().navigate(R.id.action_login_to_signup)*/
+            findNavController().navigate(R.id.fragment_signup)
         }
 
     }
@@ -75,6 +77,7 @@ class Login : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 var stringToast = if(snapshot.hasChild(username)){
                     if(isPasswordMatches(snapshot.child(username), password)){
+                        Session.username = username
                         "Đăng nhập thành công"
                     }
                     else{
