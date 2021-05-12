@@ -33,4 +33,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txt_noaccount">Chưa có tài khoản? Đăng ký mới!</string>
 
+    <string name="viewDetail"><u>Xem chi tiết</u></string>
+    <string name="viewInfo">Xem thông tin</string>
+    <string name="activePump">Số máy bơm đang hoạt động</string>
+    <string name="pumpList"><u>Danh sách máy bơm</u></string>
+
 </resources>

@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GardBot">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".ViewInfomation.ViewTemperatorInfoActivity"></activity>
+        <activity android:name=".ViewInfomation.ViewPumpInfoActivity" />
+        <activity android:name=".ViewInfomation.ViewHumidityInfoActivity" />
+        <activity android:name=".ViewInfomation.ViewSoilInfoActivity" />
+        <activity android:name=".ViewInfomation.ViewInfomationActivity" />
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".AuthActivity"
             android:label="@string/app_name"

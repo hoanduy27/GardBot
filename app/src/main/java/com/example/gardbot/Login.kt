@@ -8,11 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.gardbot.ViewInfomation.ViewInfomationActivity
 import com.example.gardbot.databinding.FragmentLoginBinding
 import com.google.firebase.database.*
 import com.google.firebase.*
@@ -87,7 +85,8 @@ class Login : Fragment() {
                 Toast.makeText(context, stringToast, Toast.LENGTH_SHORT).show()
                 if(stringToast == "Đăng nhập thành công"){
                     Log.e("he", activity.toString())
-                    val intent = Intent(activity, MainActivity::class.java)
+//                    val intent = Intent(activity, MainActivity::class.java)
+                    val intent = Intent(activity, ViewInfomationActivity::class.java)
                     startActivity(intent)
                 }
             }

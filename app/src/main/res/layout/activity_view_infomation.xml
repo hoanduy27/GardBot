@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewInfomation.ViewInfomationActivity">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/roundedImageView3"
+        android:layout_width="170dp"
+        android:layout_height="140dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/pump"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.802"
+        app:riv_corner_radius="18dp" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/roundedImageView2"
+        android:layout_width="170dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/temperatures"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.802"
+        app:riv_corner_radius="18dp" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/roundedImageView"
+        android:layout_width="170dp"
+        android:layout_height="140dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/humidity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.389"
+        app:riv_corner_radius="18dp" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/roundedImageView4"
+        android:layout_width="170dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/soil_moisture"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.389"
+        app:riv_corner_radius="18dp" />
+
+    <TextView
+        android:id="@+id/textView_SoilMoisture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:text="Soil Moisture"
+        android:textColor="@color/white"
+        android:textSize="27dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/roundedImageView4"
+        app:layout_constraintEnd_toEndOf="@+id/roundedImageView4"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="@+id/roundedImageView4"
+        app:layout_constraintTop_toTopOf="@+id/roundedImageView4" />
+
+    <TextView
+        android:id="@+id/textView_Humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:text="Humidity"
+        android:textColor="@color/white"
+        android:textSize="27dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/roundedImageView"
+        app:layout_constraintEnd_toEndOf="@+id/roundedImageView"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="@+id/roundedImageView"
+        app:layout_constraintTop_toTopOf="@+id/roundedImageView"
+        app:layout_constraintVertical_bias="0.349" />
+
+    <TextView
+        android:id="@+id/textView_CurrentHumidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:text="50%"
+        android:textColor="@color/white"
+        android:textSize="27dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/roundedImageView"
+        app:layout_constraintEnd_toEndOf="@+id/roundedImageView"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="@+id/roundedImageView"
+        app:layout_constraintTop_toTopOf="@+id/roundedImageView"
+        app:layout_constraintVertical_bias="0.82" />
+
+    <TextView
+        android:id="@+id/textView_Temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:text="Temperatures"
+        android:textColor="@color/white"
+        android:textSize="27dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/roundedImageView2"
+        app:layout_constraintEnd_toEndOf="@+id/roundedImageView2"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="@+id/roundedImageView2"
+        app:layout_constraintTop_toTopOf="@+id/roundedImageView2"
+        app:layout_constraintVertical_bias="0.377" />
+
+    <TextView
+        android:id="@+id/textView_CurrentTemperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:text="25°C"
+        android:textColor="@color/white"
+        android:textSize="27dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/roundedImageView2"
+        app:layout_constraintEnd_toEndOf="@+id/roundedImageView2"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="@+id/roundedImageView2"
+        app:layout_constraintTop_toTopOf="@+id/roundedImageView2"
+        app:layout_constraintVertical_bias="0.792" />
+
+    <TextView
+        android:id="@+id/textView_Pump"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:text="Pump"
+        android:textColor="@color/white"
+        android:textSize="27dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/roundedImageView3"
+        app:layout_constraintEnd_toEndOf="@+id/roundedImageView3"
+        app:layout_constraintStart_toStartOf="@+id/roundedImageView3"
+        app:layout_constraintTop_toTopOf="@+id/roundedImageView3"
+        app:layout_constraintVertical_bias="0.377" />
+
+    <TextView
+        android:id="@+id/textView_CurrentActivePump"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:text="Active: 0/5"
+        android:textColor="@color/white"
+        android:textSize="27dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/roundedImageView3"
+        app:layout_constraintEnd_toEndOf="@+id/roundedImageView3"
+        app:layout_constraintStart_toStartOf="@+id/roundedImageView3"
+        app:layout_constraintTop_toTopOf="@+id/roundedImageView3"
+        app:layout_constraintVertical_bias="0.792" />
+
+    <TextView
+        android:id="@+id/textViewDetail_Soil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
+        android:layout_weight="1"
+        android:fontFamily="monospace"
+        android:text="@string/viewDetail"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/roundedImageView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roundedImageView4"
+        app:layout_constraintVertical_bias="0.188" />
+
+    <TextView
+        android:id="@+id/textViewDetail_Humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
+        android:layout_weight="1"
+        android:fontFamily="monospace"
+        android:text="@string/viewDetail"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/roundedImageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roundedImageView"
+        app:layout_constraintVertical_bias="0.188" />
+
+    <TextView
+        android:id="@+id/textViewDetail_Temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
+        android:layout_weight="1"
+        android:fontFamily="monospace"
+        android:text="@string/viewDetail"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roundedImageView2"
+        app:layout_constraintVertical_bias="0.153" />
+
+    <TextView
+        android:id="@+id/textViewDetail_Pump"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
+        android:layout_weight="1"
+        android:fontFamily="monospace"
+        android:text="@string/viewDetail"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roundedImageView3"
+        app:layout_constraintVertical_bias="0.153" />
+
+    <TextView
+        android:id="@+id/textViewTitleViewInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:text="@string/viewInfo"
+        android:textColor="@color/black"
+        android:textSize="35dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.119" />
+</androidx.constraintlayout.widget.ConstraintLayout>
