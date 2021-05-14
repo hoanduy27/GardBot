@@ -1,10 +1,14 @@
 package com.example.gardbot.ViewInfomation
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import android.widget.ListView
+import android.widget.TextView
 import com.example.gardbot.Adapter.CustomCurSoilAdapter
+import com.example.gardbot.Adapter.CustomSoilDetailAdapter
+import com.example.gardbot.Model.SoilHistory
 import com.example.gardbot.Model.SoilSensor
 import com.example.gardbot.R
 import com.google.firebase.database.ChildEventListener
@@ -13,41 +17,48 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-class ViewSoilInfoActivity : AppCompatActivity() {
-    var curSoilList = ArrayList<SoilSensor>()
-    lateinit var adapter : CustomCurSoilAdapter
-    var select : SoilSensor? = null
+class ViewSoilDetailActivity : AppCompatActivity() {
+    var soilHistoryList = ArrayList<SoilHistory>()
+    var select : SoilHistory? = null
     var selectPosition : Int? = null
+    lateinit var adapter : CustomSoilDetailAdapter
+    lateinit var listViewSoilHistory : ListView
 
     val database = Firebase.database
-    val myRef = database.getReference().child("sensor").child("soilMoisture")
-
-    lateinit var listViewCurSoil : ListView
+    val myRef = database.getReference().child("history").child("moisture")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_view_soil_info)
+        setContentView(R.layout.activity_view_soil_detail)
 
-        listViewCurSoil = findViewById<ListView>(R.id.listViewCurSoil)
-        adapter = CustomCurSoilAdapter(this, R.layout.custom_soil_history_element, curSoilList)
-        listViewCurSoil.adapter = adapter
+        var textCurSoil = findViewById<TextView>(R.id.textCurSoil)
+        val curSoil = intent.getSerializableExtra("cur_soil") as SoilSensor
+        textCurSoil.text = curSoil.moisture + "%"
+
+        if (curSoil.moisture!!.toInt() < 10)
+            findViewById<LinearLayout>(R.id.linearLayoutCurSoil).setBackgroundResource(R.drawable.custom_info_warning)
+
+        listViewSoilHistory = findViewById<ListView>(R.id.listViewSoilHistory)
+        adapter = CustomSoilDetailAdapter(this, R.layout.custom_simple_list_element, soilHistoryList)
+        listViewSoilHistory.adapter = adapter
 
         myRef.addChildEventListener(object : ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                var cur_soil : SoilSensor = snapshot.getValue(SoilSensor::class.java)!!
-                curSoilList.add(cur_soil)
+                var time = snapshot.key
+                var value = snapshot.child("value").getValue(String::class.java)
+                soilHistoryList.add(SoilHistory(time!!, value!!))
                 adapter.notifyDataSetChanged()
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                curSoilList.clear()
+                soilHistoryList.clear()
                 myRef.removeEventListener(this)
                 myRef.addChildEventListener(this)
                 adapter.notifyDataSetChanged()
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
-                curSoilList.clear()
+                soilHistoryList.clear()
                 myRef.removeEventListener(this)
                 myRef.addChildEventListener(this)
                 adapter.notifyDataSetChanged()
@@ -58,16 +69,6 @@ class ViewSoilInfoActivity : AppCompatActivity() {
 
             override fun onCancelled(error: DatabaseError) {
             }
-
         })
-
-        listViewCurSoil.setOnItemClickListener { adapter, view, position, id ->
-            select = curSoilList[position]
-            selectPosition = position
-
-            val intent = Intent(this, ViewSoilDetailActivity::class.java)
-            intent.putExtra("cur_soil", select)
-            startActivity(intent)
-        }
     }
 }

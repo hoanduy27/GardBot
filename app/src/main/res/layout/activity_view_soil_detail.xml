@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewInfomation.ViewPumpInfoActivity">
+    tools:context=".ViewInfomation.ViewSoilDetailActivity">
 
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayoutCurSoil"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/custom_info_element"
@@ -28,14 +28,14 @@
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:fontFamily="monospace"
-            android:text="@string/activePump"
+            android:text="@string/curSoil"
             android:textColor="@color/black"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textActivePumpInfo"
+            android:id="@+id/textCurSoil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -43,32 +43,34 @@
             android:layout_weight="1"
             android:fontFamily="monospace"
             android:gravity="end"
-            android:text="0/5"
+            android:text="50%"
             android:textColor="@color/black"
             android:textSize="18dp" />
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textViewListOfPump"
+        android:id="@+id/textViewSoilHistory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:fontFamily="monospace"
-        android:text="@string/pumpList"
+        android:text="@string/recorded_history"
         android:textColor="@color/black"
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCurSoil"
         app:layout_constraintVertical_bias="0.047" />
 
     <ListView
-        android:id="@+id/listViewPump"
+        android:id="@+id/listViewSoilHistory"
         android:layout_width="409dp"
         android:layout_height="600dp"
+        android:dividerHeight="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewListOfPump" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewSoilHistory" />
 </androidx.constraintlayout.widget.ConstraintLayout>

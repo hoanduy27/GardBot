@@ -37,5 +37,9 @@
     <string name="viewInfo">Xem thông tin</string>
     <string name="activePump">Số máy bơm đang hoạt động</string>
     <string name="pumpList"><u>Danh sách máy bơm</u></string>
+    <string name="curSoil">Độ ẩm đất hiện tại</string>
+    <string name="curHumidity">Độ ẩm không khí hiện tại</string>
+    <string name="curTemperator">Nhiệt độ không khí hiện tại</string>
+    <string name="recorded_history">Lịch sử ghi nhận</string>
 
 </resources>
