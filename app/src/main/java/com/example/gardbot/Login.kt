@@ -26,7 +26,6 @@ class Login : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private lateinit var database: DatabaseReference
 
-
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
