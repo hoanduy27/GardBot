@@ -93,6 +93,6 @@ class ViewInfomationActivity : AppCompatActivity() {
     }
 
     fun moveToTemperatorInfo(){
-        startActivity(Intent(this, ViewTemperatorInfoActivity::class.java))
+        startActivity(Intent(this, ViewTemperatureInfoActivity::class.java))
     }
 }

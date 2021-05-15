@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GardBot">
         <activity android:name=".ViewInfomation.ViewSoilDetailActivity"></activity>
-        <activity android:name=".ViewInfomation.ViewTemperatorInfoActivity" />
+        <activity android:name=".ViewInfomation.ViewTemperatureInfoActivity" />
         <activity android:name=".ViewInfomation.ViewPumpInfoActivity" />
         <activity android:name=".ViewInfomation.ViewHumidityInfoActivity" />
         <activity android:name=".ViewInfomation.ViewSoilInfoActivity" />
