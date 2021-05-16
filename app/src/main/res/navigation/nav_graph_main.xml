@@ -8,11 +8,51 @@
     <fragment
         android:id="@+id/dashboard"
         android:name="com.example.gardbot.Dashboard"
-        android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_dashboard" >
+        <argument android:name="user"
+            app:argType="string"/>
+    </fragment>
     <fragment
-        android:id="@+id/sensorPumpFragment"
-        android:name="com.example.gardbot.SensorPumpFragment"
-        android:label="fragment_sensorpump"
-        tools:layout="@layout/fragment_sensorpump" />
+        android:id="@+id/functions"
+        android:name="com.example.gardbot.Functions"
+        android:label="{systemName}"
+        tools:layout="@layout/fragment_functions" >
+        <argument
+            android:name="systemName"
+            app:argType="string" />
+        <argument
+            android:name="systemID"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/historySelectPump"
+        android:name="com.example.gardbot.HistorySelectPump"
+        android:label="{systemName} - Lịch sử"
+        tools:layout="@layout/fragment_history_select_pump" >
+        <argument
+            android:name="systemName"
+            app:argType="string" />
+        <argument
+            android:name="systemID"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyPump"
+        android:name="com.example.gardbot.HistoryPump"
+        android:label="{systemName} - Lịch sử"
+        tools:layout="@layout/fragment_history_pump" >
+        <argument
+            android:name="systemName"
+            app:argType="string" />
+        <argument
+            android:name="systemID"
+            app:argType="string" />
+        <argument
+            android:name="pumpName"
+            app:argType="string" />
+        <argument
+            android:name="pumpID"
+            app:argType="string" />
+    </fragment>
 </navigation>

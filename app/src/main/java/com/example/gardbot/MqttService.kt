@@ -4,13 +4,14 @@ import android.content.Context
 import android.util.Log
 import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
+import java.nio.charset.Charset
 
 class MqttService(context: Context?) {
     val serverUri = "tcp://io.adafruit.com:1883"
     val clientId = "BBC_LED"
     val subscriptionTopic = "hoanduy27/feeds/bbc-led"
     val username = "hoanduy27"
-    val password = "aio_gzWT47fqomipOxMvA1TC3c9sxBYw"
+    val password = "aio_bwga70n3FDP3jtKqWriVuE10odEf"
 
     var mqttAndroidClient: MqttAndroidClient
 
@@ -60,6 +61,21 @@ class MqttService(context: Context?) {
         } catch (ex: MqttException) {
             System.err.println("Exceptions to subscribing")
             ex.printStackTrace()
+        }
+    }
+
+    fun sendDataMqtt(data : String){
+        val msg = MqttMessage()
+        msg.id = 1234
+        msg.qos = 0
+        msg.isRetained = true
+        val b : ByteArray = data.toByteArray(Charset.forName("UTF-8"))
+        msg.payload = b
+        Log.d("MQTT", "Publish: $msg")
+        try{
+            mqttAndroidClient.publish(subscriptionTopic, msg);
+        }catch (e: MqttException){
+            Log.d("MQTT", "sendDataMQTT: cannot send msg")
         }
     }
 
