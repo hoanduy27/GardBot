@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".dashboard.DashboardActivity">
+
+    <TextView
+        android:id="@+id/sysName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="He thong"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:padding="100dp"
+        android:fontFamily="cursive"
+        android:textSize="35dp"
+        android:textColor="@color/black"
+        />
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/autoToggler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Auto"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        />
+    <GridView
+        android:id="@+id/funcList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="2"
+        android:horizontalSpacing="50dp"
+        android:verticalSpacing="50dp" />
+</LinearLayout>

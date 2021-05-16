@@ -4,17 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".HistorySelectPump">
+    tools:context=".history.HistoryPumpActivity">
 
     <TextView
+        android:id="@+id/pumpHistory_pumpName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Chọn máy bơm"
+        android:text="Máy bơm: "
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="30sp"/>
+    <TextView
+        android:id="@+id/pumpHistory_sensorName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sensor: "
         android:padding="10dp"
         android:textColor="@color/black"
         android:textSize="30sp"/>
     <ListView
-        android:id="@+id/pumpList"
+        android:id="@+id/pumpHistory"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:numColumns="2"

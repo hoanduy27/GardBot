@@ -1,4 +1,4 @@
-package com.example.gardbot
+package com.example.gardbot.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,15 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.gardbot.R
+import com.example.gardbot.dashboard.DashboardActivity
 import com.example.gardbot.databinding.FragmentLoginBinding
 import com.google.firebase.database.*
-import com.google.firebase.*
-import model.Session
+import com.example.gardbot.model.Session
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -89,7 +87,7 @@ class Login : Fragment() {
                 Toast.makeText(context, stringToast, Toast.LENGTH_SHORT).show()
                 if(stringToast == "Đăng nhập thành công"){
                     Log.e("he", activity.toString())
-                    val intent = Intent(activity, MainActivity::class.java)
+                    val intent = Intent(activity, DashboardActivity::class.java)
                     startActivity(intent)
                 }
             }

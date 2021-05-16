@@ -5,12 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Dashboard">
+    tools:context=".dashboard.DashboardActivity">
 
+    <TextView
+        android:id="@+id/dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dashboard (Click to demo)"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:padding="100dp"
+        android:fontFamily="cursive"
+        android:textSize="35dp"
+        android:textColor="@color/black"
+        />
     <GridView
         android:id="@+id/sysList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:numColumns="2"
         android:horizontalSpacing="50dp"
         android:verticalSpacing="50dp" />

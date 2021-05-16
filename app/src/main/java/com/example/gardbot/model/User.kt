@@ -1,4 +1,4 @@
-package model
+package com.example.gardbot.model
 
 class User {
     private lateinit var username : String

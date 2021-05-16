@@ -1,4 +1,4 @@
-package model
+package com.example.gardbot.model
 
 class WateringSystem {
     lateinit var autoStatus : String

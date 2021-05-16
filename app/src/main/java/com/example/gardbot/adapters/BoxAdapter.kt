@@ -1,4 +1,4 @@
-package Adapters
+package com.example.gardbot.adapters
 
 import android.view.View
 import android.view.ViewGroup

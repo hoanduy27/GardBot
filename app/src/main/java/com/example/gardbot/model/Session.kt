@@ -1,4 +1,4 @@
-package model
+package com.example.gardbot.model
 
 import com.example.gardbot.MqttService
 

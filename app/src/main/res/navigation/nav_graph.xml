@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_login"
-        android:name="com.example.gardbot.Login"
+        android:name="com.example.gardbot.auth.Login"
         android:label="@string/fragment_login"
         tools:layout="@layout/fragment_login">
 
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/fragment_signup"
-        android:name="com.example.gardbot.SignUp"
+        android:name="com.example.gardbot.auth.SignUp"
         android:label="@string/fragment_signup"
         tools:layout="@layout/fragment_signup">
 
