@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.example.gardbot.auth.AuthActivity
 import com.example.gardbot.R
+import com.example.gardbot.viewInfomation.ViewInfomationActivity
 import com.example.gardbot.databinding.ActivitySystemBinding
 import com.example.gardbot.history.HistorySelectPumpActivity
 import com.google.firebase.database.*
@@ -52,7 +53,11 @@ class SystemActivity : AppCompatActivity() {
             })
         }
         binding.funcList.setOnItemClickListener { parent, view : View, position, id : Long->
-            //
+            if(id == 0L){
+                intent = Intent(this, ViewInfomationActivity::class.java)
+                startActivity(intent)
+            }
+
             if(id == 2L){
                 intent = Intent(this, HistorySelectPumpActivity::class.java)
                 intent.putExtra("sysID", sysID)
