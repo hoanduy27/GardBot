@@ -11,14 +11,14 @@ import androidx.fragment.app.Fragment
 import com.example.gardbot.databinding.FragmentDashboardBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended
 import org.eclipse.paho.client.mqttv3.MqttException
 import org.eclipse.paho.client.mqttv3.MqttMessage
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import java.nio.charset.Charset
 
@@ -34,6 +34,8 @@ class Dashboard : Fragment() {
     private lateinit var database: DatabaseReference
 
     private lateinit var mqttService : MqttService
+
+    private lateinit var retrofitClient: RetrofitClient
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -76,6 +78,10 @@ class Dashboard : Fragment() {
 
             }
         })
+
+        //retrofit
+        retrofitClient = RetrofitClient()
+
         return binding.root
     }
 
@@ -88,13 +94,8 @@ class Dashboard : Fragment() {
                 //sendDataMqtt("0")
                 //findNavController().navigate(R.id.sensorPumpFragment)
                 //BASE_URL = "http://127.0.0.1:5000/"
-                val flaskMqttApi: FlaskMqttApi
-                val retrofit: Retrofit = Retrofit.Builder()
-                    .baseUrl("http://127.0.0.1:5000/")
-                    .build()
-                flaskMqttApi = retrofit.create(FlaskMqttApi::class.java)
-                val call: Call<String> = flaskMqttApi.createPost("0")
-                call.execute()
+
+                retrofitClient.uploadValue("0")
             }
         }
     }
