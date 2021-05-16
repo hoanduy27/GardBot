@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import com.example.gardbot.ActivityPump
 import com.example.gardbot.auth.AuthActivity
 import com.example.gardbot.R
 import com.example.gardbot.viewInfomation.ViewInfomationActivity
@@ -57,8 +58,12 @@ class SystemActivity : AppCompatActivity() {
                 intent = Intent(this, ViewInfomationActivity::class.java)
                 startActivity(intent)
             }
+            else if(id == 1L) {
+                intent = Intent(this, ActivityPump::class.java)
+                startActivity(intent)
+            }
 
-            if(id == 2L){
+            else if(id == 2L){
                 intent = Intent(this, HistorySelectPumpActivity::class.java)
                 intent.putExtra("sysID", sysID)
                 startActivity(intent)
