@@ -38,13 +38,25 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:background="@color/buttonBackground"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/btn_login" />
 
     <TextView
         android:id="@+id/txt_noaccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
         android:text="@string/txt_noaccount"
         android:clickable="true"/>
+
+    <Button
+        android:id="@+id/btn_demo"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@color/buttonBackground"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Demo adafruit" />
 
 </LinearLayout>
