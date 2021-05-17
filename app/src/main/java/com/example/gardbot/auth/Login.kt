@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
+import com.example.gardbot.DemoActivity
 import com.example.gardbot.R
 import com.example.gardbot.dashboard.DashboardActivity
 import com.example.gardbot.databinding.FragmentLoginBinding
@@ -53,6 +54,11 @@ class Login : Fragment() {
             validateLogin()
             //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
+        binding.btnDemo.setOnClickListener(){
+            startActivity(
+                Intent(activity, DemoActivity::class.java)
+            )
+        }
         binding.txtNoaccount.setOnClickListener{
             Log.e("CurrentFragment", this.toString())
             /*findNavController().navigate(R.id.action_login_to_signup)*/
@@ -86,7 +92,6 @@ class Login : Fragment() {
                 }
                 Toast.makeText(context, stringToast, Toast.LENGTH_SHORT).show()
                 if(stringToast == "Đăng nhập thành công"){
-                    Log.e("he", activity.toString())
                     val intent = Intent(activity, DashboardActivity::class.java)
                     startActivity(intent)
                 }
