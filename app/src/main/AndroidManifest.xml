@@ -12,7 +12,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.GardBot">
+        android:theme="@style/Theme.GardBot"
+        android:usesCleartextTraffic="true">
         <activity android:name=".dashboard.SystemActivity"></activity>
         <activity android:name=".dashboard.DashboardActivity" />
         <activity android:name=".history.HistorySelectPumpActivity"/>
@@ -23,7 +24,7 @@
         <activity android:name=".viewInfomation.ViewHumidityInfoActivity" />
         <activity android:name=".viewInfomation.ViewSoilInfoActivity" />
         <activity android:name=".viewInfomation.ViewInfomationActivity" />
-        <activity android:name=".ActivityPump"
+        <activity android:name=".pumpControl.ActivityPump"
             android:exported="true"/>
         <activity android:name=".DemoActivity"></activity>
         <activity

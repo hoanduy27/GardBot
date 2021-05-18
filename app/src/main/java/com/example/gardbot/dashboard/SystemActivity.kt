@@ -11,7 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import com.example.gardbot.ActivityPump
+import com.example.gardbot.pumpControl.ActivityPump
 import com.example.gardbot.auth.AuthActivity
 import com.example.gardbot.R
 import com.example.gardbot.viewInfomation.ViewInfomationActivity
@@ -100,7 +100,7 @@ class SystemActivity : AppCompatActivity() {
         funcList.add(Selection("", "Xem thông tin", ""))
         funcList.add(Selection("", "Điều khiển máy bơm", ""))
         funcList.add(Selection("", "Lịch sử", ""))
-        funcList.add(Selection("", "Dieu khien nguoi dung", ""))
+        funcList.add(Selection("", "Quản lý người dùng", ""))
     }
     fun addOperatorManagerFunction(mRef : DatabaseReference){
 

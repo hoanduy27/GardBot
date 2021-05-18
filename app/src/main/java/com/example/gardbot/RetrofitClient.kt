@@ -15,10 +15,9 @@ class RetrofitClient {
             .baseUrl(url)
             .build()
     }
-
-    public fun uploadValue(value: String) {
+    public fun uploadValue(feed_id: String, value: String) {
         val flaskMqttApi = this.retrofit?.create(FlaskMqttApi::class.java)
-        val call = flaskMqttApi?.uploadValue(value)
+        val call = flaskMqttApi?.uploadValue(feed_id, value)
         call?.enqueue(object: Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void> )
             {
@@ -29,8 +28,14 @@ class RetrofitClient {
             }
         })
     }
+    fun getLocalHostUrl() : String{
+        return this.BASE_URL
+    }
+    fun getBaseUrl() : String{
+        return this.retrofit?.baseUrl().toString()
+    }
 
     init {
-        getClient(this.BASE_URL)
+        this.getClient(this.BASE_URL)
     }
 }
