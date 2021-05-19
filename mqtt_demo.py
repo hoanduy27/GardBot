@@ -59,17 +59,16 @@ def test():
         feed_id = request.form['feed_id']
         print(feed_id)
         mqtt.send_feed_data(feed_id, value)
+        return 'OK'
 
-    else:
+    """ else:
         #Not done yet
-        feed_id = request.args.get('feed_id')
+        feed_id = request.args.get('feed_id') """
 
 
 
 if __name__ == '__main__':
     app.run(port = 5000, debug = True)
-
-
     #app.test_client().get('/test', query_string=dict(value="s0001"))
 
 
