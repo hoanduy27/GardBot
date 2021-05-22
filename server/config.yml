@@ -1,0 +1,19 @@
+IO_USERNAME: gardbot
+IO_KEY: aio_YvkL59EbVWwMsqyuCLWpXn7outeQ
+feed: 
+  input:
+    sensor:
+      - s0001
+      - s0002
+      - s0003
+      - s0004
+  output:
+  - p0001
+  - p0002
+  - p0003
+  - p0004
+
+firebase:
+  secret: fzXrGa22e78ybBS92CCNuUsxt3j9ciWJ3Jhu7WbS
+  email: hoanduy27@gmail.com
+  db: https://garbbot-default-rtdb.asia-southeast1.firebasedatabase.app/
