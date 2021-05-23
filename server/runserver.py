@@ -17,4 +17,4 @@ def send_pump_signal():
 
 if __name__ == '__main__':
     mqtt = MQTT()
-    app.run(port = 5000, debug = True)
+    app.run(port = 5000, debug = False)

@@ -5,7 +5,7 @@ import sys
 import time
 import random
 from firebaseLog import LogApp
-from threading import Thread, Timer
+from threading import Thread
 
 class MQTT:
     def __init__(self):
