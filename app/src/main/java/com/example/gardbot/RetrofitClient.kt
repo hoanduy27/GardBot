@@ -21,7 +21,7 @@ class RetrofitClient {
         call?.enqueue(object: Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void> )
             {
-                // Xử lý response server trả về
+                response.message()
             }
             override fun onFailure(call: Call<Void>?, t: Throwable?) {
                 Log.v("retrofit", t.toString())

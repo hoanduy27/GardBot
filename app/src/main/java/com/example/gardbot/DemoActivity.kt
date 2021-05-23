@@ -16,8 +16,6 @@ class DemoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_demo)
 
-
-
         binding = ActivityDemoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

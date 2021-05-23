@@ -11,15 +11,16 @@ class MQTT:
         self.client = MQTTClient(config['IO_USERNAME'], config['IO_KEY'])
 
         self.data = {key: 0 for key in config['feed']['input']}
-        #self.data = {key: 0 for key in config['feed']['output']}
         self.data.update({key: 0 for key in config['feed']['output']})
 
         def connected(client):
             for item in self.data.keys():
                 self.client.subscribe(item)
+                #Publish the last published value
+                self.client.receive(item)
 
         def message(client, feed_id, payload):
-            #self.data[feed_id] = payload
+            self.data[feed_id] = payload
             print('Feed {0} received new value: {1}'.format(feed_id, payload))
 
         def disconnected(client):
@@ -52,29 +53,20 @@ from flask import render_template, request, redirect, url_for, jsonify, make_res
 
 app = Flask(__name__)
 
-@app.route('/test', methods=['POST', 'GET'])
+@app.route('/test', methods=['POST'])
 def test():
-    if request.method == 'POST':
-        value = request.form['value']
-        feed_id = request.form['feed_id']
-        print(feed_id)
-        mqtt.send_feed_data(feed_id, value)
-        return 'OK'
+    value = request.form['value']
+    feed_id = request.form['feed_id']
+    print(feed_id)
+    mqtt.send_feed_data(feed_id, value)
+    return 'OK'
 
-    """ else:
-        #Not done yet
-        feed_id = request.args.get('feed_id') """
-
-
+@app.route('/read_sensor', methods=['POST'])
+def read_sensor():
+    feed_id = request.form.get('feed_id')
+    return str(mqtt.data[feed_id])
 
 if __name__ == '__main__':
     app.run(port = 5000, debug = True)
-    #app.test_client().get('/test', query_string=dict(value="s0001"))
-
-
-
-
-
-
 
 
