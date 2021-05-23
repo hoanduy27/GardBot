@@ -11,8 +11,10 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import com.example.gardbot.pumpControl.ActivityPump
 import com.example.gardbot.auth.AuthActivity
 import com.example.gardbot.R
+import com.example.gardbot.viewInfomation.ViewInfomationActivity
 import com.example.gardbot.databinding.ActivitySystemBinding
 import com.example.gardbot.history.HistorySelectPumpActivity
 import com.google.firebase.database.*
@@ -52,8 +54,16 @@ class SystemActivity : AppCompatActivity() {
             })
         }
         binding.funcList.setOnItemClickListener { parent, view : View, position, id : Long->
-            //
-            if(id == 2L){
+            if(id == 0L){
+                intent = Intent(this, ViewInfomationActivity::class.java)
+                startActivity(intent)
+            }
+            else if(id == 1L) {
+                intent = Intent(this, ActivityPump::class.java)
+                startActivity(intent)
+            }
+
+            else if(id == 2L){
                 intent = Intent(this, HistorySelectPumpActivity::class.java)
                 intent.putExtra("sysID", sysID)
                 startActivity(intent)
@@ -90,7 +100,7 @@ class SystemActivity : AppCompatActivity() {
         funcList.add(Selection("", "Xem thông tin", ""))
         funcList.add(Selection("", "Điều khiển máy bơm", ""))
         funcList.add(Selection("", "Lịch sử", ""))
-        funcList.add(Selection("", "Dieu khien nguoi dung", ""))
+        funcList.add(Selection("", "Quản lý người dùng", ""))
     }
     fun addOperatorManagerFunction(mRef : DatabaseReference){
 

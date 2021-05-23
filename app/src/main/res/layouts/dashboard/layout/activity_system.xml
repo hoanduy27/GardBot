@@ -15,7 +15,6 @@
         android:textAlignment="center"
         android:layout_gravity="center"
         android:padding="100dp"
-        android:fontFamily="cursive"
         android:textSize="35dp"
         android:textColor="@color/black"
         />

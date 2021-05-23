@@ -1,0 +1,14 @@
+IO_USERNAME: gardbot
+IO_KEY: aio_HUvz00JytPh5SR68NtTBpJTxneBi
+feed: 
+  input:
+    sensor:
+      - s0001
+      - s0002
+      - s0003
+      - s0004
+  output:
+  - p0001
+  - p0002
+  - p0003
+  - p0004

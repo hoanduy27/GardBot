@@ -1,14 +1,11 @@
 <resources>
     <string name="app_name">Gardbot</string>
-    <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="fragment_login">Đăng nhập</string>
     <string name="fragment_signup">Đăng ký tài khoản</string>
-    <string name="fragment_dashboard">Dashboard</string>
 
 
     <string name="btn_login">Đăng nhập</string>
-    <string name="previous">Previous</string>
 
     <string name="txt_login">Đăng nhập</string>
     <string name="txtbox_username">Tên đăng nhập</string>
@@ -23,14 +20,7 @@
     <string name="btn_signup">Đăng ký</string>
     <string name="btn_cancel">Hủy</string>
 
-    <string name="txt_signout">Đăng xuất</string>
-
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="toast_button_text">Toast</string>
-    <string name="count_button_text">Count</string>
-    <string name="sign_up">Random betwwen 0 and %d</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txt_noaccount">Chưa có tài khoản? Đăng ký mới!</string>
     <string name="title_activity_dashboard">MainActivity</string>
     <!-- Strings used for fragments for navigation -->
@@ -39,5 +29,14 @@
     <string name="next">Next</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
+
+    <string name="viewDetail"><u>Xem chi tiết</u></string>
+    <string name="viewInfo">Xem thông tin</string>
+    <string name="activePump">Số máy bơm đang hoạt động</string>
+    <string name="pumpList"><u>Danh sách máy bơm</u></string>
+    <string name="curSoil">Độ ẩm đất hiện tại</string>
+    <string name="curHumidity">Độ ẩm không khí hiện tại</string>
+    <string name="curTemperator">Nhiệt độ không khí hiện tại</string>
+    <string name="recorded_history">Lịch sử ghi nhận</string>
 
 </resources>
