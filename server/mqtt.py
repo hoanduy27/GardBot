@@ -1,30 +1,36 @@
 import sys
 import json
 import yaml
+import time
 from Adafruit_IO import MQTTClient, Client
 from firebaseLog import LogApp
+from threading import Thread
 
 class MQTT:
     def __init__(self):
         with open('config.yml') as conf:
             config = yaml.safe_load(conf)
 
+        self.POOL_TIME = 10
         self.pump = config['feed']['output']
         self.sensor = config['feed']['input']['sensor']
 
         # Change when we have official announcement about json format
         self.client = MQTTClient(config['IO_USERNAME'], config['IO_KEY'])
 
-        self.data = {key: '0' for key in self.pump}
-        self.data.update({key: '0' for key in self.sensor})
+        self.data = {key: None for key in self.pump}
+        self.data.update({key: None for key in self.sensor})
 
         self.logApp = LogApp()
+
+        self.writeHistory_loop = Thread(target=self.writeSensorHistory)
+        self.writeHistory_loop.daemon = True
         
         def connected(client):
-            for item in self.data.keys():
-                client.subscribe(item + '/json')
+            for feed_id in self.data.keys():
+                client.subscribe(feed_id + '/json')
                 #Publish the last published value
-                client.receive(item + '/json')
+                client.receive(feed_id + '/json')
 
         def message(client, feed_id, payload):
             #print(payload)
@@ -61,14 +67,21 @@ class MQTT:
         self.client.on_disconnect = disconnected
         self.client.on_subscribe = subscribe
         self.client.connect()
+
+        self.writeHistory_loop.start()
         self.client.loop_background()
 
     def send_feed_data(self, feed_id, value):
         value_json = '{"value: {}"}'.format(value)
         self.client.publish(feed_id + '/json', value_json)
 
-    def listen(self):
-        self.client.loop_blocking()
+    def writeSensorHistory(self):
+        while True:
+            time.sleep(self.POOL_TIME)
+            for sensor in self.sensor: 
+                self.logApp.writeSensorHistory(sensor, self.data[sensor])
+
+
 
 
 #mqtt = MQTT()

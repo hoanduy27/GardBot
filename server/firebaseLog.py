@@ -22,14 +22,12 @@ class LogApp:
         #     def update(response):
         #         print(response)
         #     self.app.get_async('/history/moisture/', sensor, update)
-            
-
 
     def changePumpStatus(self, feed_id, value):
         self.app.put('/pump/' + feed_id, 'waterLevel', value)
 
     def changeSoilMoisute(self, feed_id, value):
-        self.app.put('/sensor/soilMoisture/' + feed_id, 'moisture', value)
+        self.app.put('/seory_loop = Thread(target=self.writory_loop = Thread(target=self.writnsor/soilMoisture/' + feed_id, 'moisture', value)
 
     def writeSensorHistory(self, feed_id, value):
         path = 'history/moisture/'
@@ -50,6 +48,7 @@ class LogApp:
             history.keys())
         )
         return min(time_records).strftime(self.TIME_FORMAT)
+        
         
     def deleteLastHistoryRecord(self, collection, feed_id):
         key = self.lastHistoryRecord(collection, feed_id)
