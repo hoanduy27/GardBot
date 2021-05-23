@@ -5,29 +5,30 @@ import sys
 import time
 import random
 from firebaseLog import LogApp
+from threading import Thread, Timer
 
 class MQTT:
     def __init__(self):
         with open('config.yml') as conf:
             config = yaml.safe_load(conf)
 
-        self.pump = config['feed']['output']
-        self.sensor = config['feed']['input']['sensor']
+        pump = config['feed']['output']
+        sensor = config['feed']['input']['sensor']
 
         # Change when we have official announcement about json format
-        pump_init = '{"value": "0"}'
-        sensor_init = '{"value": "0"}'
 
         self.client = MQTTClient(config['IO_USERNAME'], config['IO_KEY'])
 
-        self.data = {key: pump_init for key in self.pump}
-        self.data.update({key: sensor_init for key in self.sensor})
+        self.pump = {key: None for key in pump}
+        self.sensor = {key: None for key in sensor}
 
         self.logApp = LogApp()
 
+        self.writeHistory_loop = Thread(target=self.writeSensorsHistory)
+        self.writeHistory_loop.daemon = True
         
         def connected(client):
-            for feed_id in self.data.keys():
+            for feed_id in list(self.pump.keys())+list(self.sensor.keys()):
                 client.subscribe(feed_id + '/json')
                 #Receive the last published value
                 client.receive(feed_id + '/json')
@@ -42,9 +43,11 @@ class MQTT:
                 value = payload['value']
             if(feed_id in self.pump):
                 # Depends on json format
+                self.pump[feed_id] = value
                 self.logApp.changePumpStatus(feed_id, value)
             elif(feed_id in self.sensor):   
                 # Depends on json format
+                self.sensor[feed_id] = value
                 self.logApp.changeSoilMoisute(feed_id, value)
             # Depends on json format
             print('Feed {0} received new value: {1}'.format(feed_id, value))
@@ -63,13 +66,15 @@ class MQTT:
         self.client.on_disconnect = disconnected
         self.client.on_subscribe = subscribe
         self.client.connect()
+        self.writeHistory_loop.start()
         self.client.loop_background()
 
     def send_feed_data(self, feed_id, value):
         value_json = '{"value: {}"}'.format(value)
         self.client.publish(feed_id + '/json', value_json)
 
-    def listen(self):
-        self.client.loop_blocking()
-
-mqtt = MQTT()
+    def writeSensorsHistory(self):
+        while True:
+            time.sleep(10)
+            for sensor_id in self.sensor:
+                self.logApp.writeSensorHistory(sensor_id,self.sensor[sensor_id])

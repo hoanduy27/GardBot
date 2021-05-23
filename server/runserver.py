@@ -3,14 +3,7 @@ from flask import render_template, request, redirect, url_for, jsonify, make_res
 from threading import Thread
 from firebase.firebase import FirebaseApplication, FirebaseAuthentication
 
-from mqtt import mqtt
-
-def read_sensor():
-    pass
-
-def read_write_firebase():
-    while True:
-        pass
+from mqtt import MQTT
 
 app = Flask(__name__)
 
@@ -20,12 +13,8 @@ def send_pump_signal():
     feed_id = request.form['feed_id']
     print(feed_id)
     mqtt.send_feed_data(feed_id, value)
-    return 'OK'       
-
-@app.route('/read_sensor', methods=['POST']) 
-def read_sensor():
-    feed_id = request.form.get('feed_id')
-    return str(mqtt.data[feed_id])
+    return 'OK'
 
 if __name__ == '__main__':
+    mqtt = MQTT()
     app.run(port = 5000, debug = True)
