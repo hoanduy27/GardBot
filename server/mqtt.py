@@ -12,14 +12,14 @@ class MQTT:
             config = yaml.safe_load(conf)
 
         self.POOL_TIME = 10
-        self.pump = config['feed']['output']
-        self.sensor = config['feed']['input']['sensor']
+        pump = config['feed']['output']
+        sensor = config['feed']['input']['sensor']
 
         # Change when we have official announcement about json format
         self.client = MQTTClient(config['IO_USERNAME'], config['IO_KEY'])
 
-        self.data = {key: None for key in self.pump}
-        self.data.update({key: None for key in self.sensor})
+        self.pump = {key: None for key in pump}
+        self.sensor = {key: None for key in sensor}
 
         self.logApp = LogApp()
 
@@ -27,7 +27,7 @@ class MQTT:
         self.writeHistory_loop.daemon = True
         
         def connected(client):
-            for feed_id in self.data.keys():
+            for feed_id in (list(self.pump.keys()) + list(self.sensor.keys())):
                 client.subscribe(feed_id + '/json')
                 #Publish the last published value
                 client.receive(feed_id + '/json')
@@ -42,12 +42,12 @@ class MQTT:
 
             if(feed_id in self.pump):
                 # Depends on json format
-                self.data[feed_id] = value
+                self.pump[feed_id] = value
                 self.logApp.changePumpStatus(feed_id, value)
 
             elif(feed_id in self.sensor):   
                 # Depends on json format
-                self.data[feed_id] = value
+                self.sensor[feed_id] = value
                 self.logApp.changeSoilMoisute(feed_id, value)
 
             # Depends on json format
@@ -67,8 +67,7 @@ class MQTT:
         self.client.on_disconnect = disconnected
         self.client.on_subscribe = subscribe
         self.client.connect()
-
-        self.writeHistory_loop.start()
+        #self.writeHistory_loop.start()
         self.client.loop_background()
 
     def send_feed_data(self, feed_id, value):
@@ -78,10 +77,5 @@ class MQTT:
     def writeSensorHistory(self):
         while True:
             time.sleep(self.POOL_TIME)
-            for sensor in self.sensor: 
-                self.logApp.writeSensorHistory(sensor, self.data[sensor])
-
-
-
-
-#mqtt = MQTT()
+            for sensor_id in self.sensor: 
+                self.logApp.writeSensorHistory(sensor_id, self.sensor[sensor_id])

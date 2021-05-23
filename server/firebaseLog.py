@@ -1,36 +1,39 @@
+from firebase import firebase
 from firebase.firebase import FirebaseApplication, FirebaseAuthentication
+from firebase import jsonutil
+import json
 from datetime import date, datetime
+import yaml
 
 class LogApp:
     def __init__(self):
         self.TIME_FORMAT = "%d-%m-%y-%H:%M:%S"
         self.MAX_RECORD = 10
 
+        with open('config.yml') as conf:
+            config = yaml.safe_load(conf)
+        self.secret = config['firebase']['secret']
+        self.email = config['firebase']['email']
+        self.db = config['firebase']['db']
+
         self.authentication = FirebaseAuthentication(
-            secret='fzXrGa22e78ybBS92CCNuUsxt3j9ciWJ3Jhu7WbS',
-            email='hoanduy27@gmail.com'
+            secret=self.secret,
+            email=self.email
         )
         self.app = FirebaseApplication(
-            'https://garbbot-default-rtdb.asia-southeast1.firebasedatabase.app/', 
+            self.db, 
             authentication=self.authentication
-        )
-        # self.sensors = self.app.get('/sensor', 'soilMoisture').keys()
-        # self.historyCount = {
-        #     'moisture': {}
-        # }
-        # for sensor in self.sensors:
-        #     def update(response):
-        #         print(response)
-        #     self.app.get_async('/history/moisture/', sensor, update)
-
+        )        
+        
     def changePumpStatus(self, feed_id, value):
         self.app.put('/pump/' + feed_id, 'waterLevel', value)
 
     def changeSoilMoisute(self, feed_id, value):
-        self.app.put('/seory_loop = Thread(target=self.writory_loop = Thread(target=self.writnsor/soilMoisture/' + feed_id, 'moisture', value)
+        self.app.put('/sensor/soilMoisture/' + feed_id, 'moisture', value)
 
     def writeSensorHistory(self, feed_id, value):
         path = 'history/moisture/'
+
         # Delete last record if number of records in this sensor > MAX_RECORD
         collection = self.app.get(path, feed_id)
         if(collection != None and len(collection) >= self.MAX_RECORD):
@@ -41,6 +44,10 @@ class LogApp:
         current_time = datetime.now().strftime(self.TIME_FORMAT)
         self.app.put(path + feed_id, current_time, json_data)
 
+    def deleteLastHistoryRecord(self, collection, feed_id):
+        key = self.lastHistoryRecord(collection, feed_id)
+        self.app.delete('/history/{}/{}'.format(collection, feed_id), key)
+    
     def lastHistoryRecord(self, collection, feed_id):
         history = self.app.get('/history/' + collection, feed_id)
         time_records = list(map(lambda t_rec: \
@@ -48,9 +55,3 @@ class LogApp:
             history.keys())
         )
         return min(time_records).strftime(self.TIME_FORMAT)
-        
-        
-    def deleteLastHistoryRecord(self, collection, feed_id):
-        key = self.lastHistoryRecord(collection, feed_id)
-        self.app.delete('/history/{}/{}'.format(collection, feed_id), key)
-        
