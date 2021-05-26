@@ -31,7 +31,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="@string/txtbox_password"
-        android:inputType="textPersonName" />
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/btn_login"

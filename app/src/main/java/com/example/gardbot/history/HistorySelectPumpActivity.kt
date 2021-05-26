@@ -101,6 +101,7 @@ class HistorySelectPumpActivity : AppCompatActivity() {
                 Log.e("soilSnapshot", soilSnapshot.toString())
                 for(pump in pumpSnapshot.children){
                     var soilID = pump.child("soilMoistureID").value.toString()
+                    //If this pump is in this system
                     if(soilSnapshot.child(soilID).child("sysID").value == sysID){
                         var p = pump.getValue(Pump::class.java)
                         pumpIds.add(pump.key.toString())
