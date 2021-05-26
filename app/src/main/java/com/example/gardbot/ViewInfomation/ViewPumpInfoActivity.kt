@@ -1,8 +1,10 @@
 package com.example.gardbot.ViewInfomation
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.ListView
 import com.example.gardbot.Adapter.CustomPumpInfoAdapter
 import com.example.gardbot.Adapter.CustomSoilDetailAdapter
@@ -23,6 +25,7 @@ class ViewPumpInfoActivity : AppCompatActivity() {
     var selectPosition : Int? = null
     lateinit var adapter : CustomPumpInfoAdapter
     lateinit var listViewPump : ListView
+    lateinit var pumpSetting : ImageView
 
     val database = Firebase.database
     val myRef = database.getReference().child("pump")
@@ -30,6 +33,8 @@ class ViewPumpInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_pump_info)
+
+        pumpSetting = findViewById<ImageView>(R.id.imageViewSettingPump)
 
         listViewPump = findViewById<ListView>(R.id.listViewPump)
         adapter = CustomPumpInfoAdapter(this, R.layout.custom_listview_pump, pumpList)
@@ -66,5 +71,15 @@ class ViewPumpInfoActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
             }
         })
+
+        pumpSetting.setOnClickListener{
+            moveToPumpSetting();
+        }
+    }
+
+    private fun moveToPumpSetting() {
+        intent = Intent(this, ViewInfomationActivity::class.java)
+//        intent = Intent(this, ActivityPump::class.java)
+        startActivity(intent)
     }
 }

@@ -64,6 +64,18 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.047" />
 
+    <ImageView
+        android:id="@+id/imageViewSettingPump"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/setting_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/listViewPump"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.958"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.142" />
+
     <ListView
         android:id="@+id/listViewPump"
         android:layout_width="409dp"
