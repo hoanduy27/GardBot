@@ -8,6 +8,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/custom_info_element"
+        android:layout_marginRight="9dp"
+        android:layout_marginLeft="9dp"
         android:orientation="vertical">
 
         <TextView
@@ -15,41 +18,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sensor 1"
-            android:textSize="20dp"
             android:textColor="@color/black"
-            android:textStyle="bold"/>
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_info_element"
             android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/linearLayout1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textViewEle1_1"
+                    android:id="@+id/textViewPumpID"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:fontFamily="monospace"
-                    android:text="@string/activePump"
+                    android:text="Sensor1"
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     tools:ignore="DuplicateIds" />
 
                 <TextView
-                    android:id="@+id/textViewEle1_2"
+                    android:id="@+id/textViewPumpStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="7dp"
                     android:layout_weight="1"
                     android:fontFamily="monospace"
                     android:gravity="end"
@@ -58,69 +60,6 @@
                     android:textSize="18dp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textViewEle2_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:fontFamily="monospace"
-                    android:text="@string/activePump"
-                    android:textColor="@color/black"
-                    android:textSize="18dp"/>
-
-                <TextView
-                    android:id="@+id/textViewEle2_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="7dp"
-                    android:layout_weight="1"
-                    android:fontFamily="monospace"
-                    android:gravity="end"
-                    android:text="0/5"
-                    android:textColor="@color/black"
-                    android:textSize="18dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textViewEle3_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:fontFamily="monospace"
-                    android:text="@string/activePump"
-                    android:textColor="@color/black"
-                    android:textSize="18dp"/>
-
-                <TextView
-                    android:id="@+id/textViewEle3_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="7dp"
-                    android:layout_weight="1"
-                    android:fontFamily="monospace"
-                    android:gravity="end"
-                    android:text="0/5"
-                    android:textColor="@color/black"
-                    android:textSize="18dp" />
-            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
