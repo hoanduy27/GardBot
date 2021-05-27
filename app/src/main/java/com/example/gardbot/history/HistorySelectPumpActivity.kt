@@ -15,6 +15,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import com.example.gardbot.auth.AuthActivity
 import com.example.gardbot.databinding.ActivityHistorySelectPumpBinding
 import com.example.gardbot.R
+import com.example.gardbot.adapters.SelectPumpHistoryBox
+import com.example.gardbot.adapters.SelectPumpHistoryBoxAdapter
 import com.example.gardbot.model.Pump
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
@@ -24,12 +26,13 @@ class HistorySelectPumpActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityHistorySelectPumpBinding
 
-    private var pumpListView = ArrayList<Box>()
+    private var pumpListView = ArrayList<SelectPumpHistoryBox>()
     private var pumpList = ArrayList<Pump>()
     private var pumpIds = ArrayList<String>()
 
-    private lateinit var adapter : BoxAdapter
+    private lateinit var adapter : SelectPumpHistoryBoxAdapter
     private lateinit var sysID : String
+    private lateinit var toSendSensorID: String
     private val database = Firebase.database
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +44,7 @@ class HistorySelectPumpActivity : AppCompatActivity() {
         sysID = intent.getStringExtra("sysID")!!
 
         //Create Adapter
-        adapter = BoxAdapter(pumpListView, this)
+        adapter = SelectPumpHistoryBoxAdapter(pumpListView, this)
         binding.pumpList.adapter= adapter
 
         //Add pumps
@@ -54,6 +57,9 @@ class HistorySelectPumpActivity : AppCompatActivity() {
             intent.putExtra("sysID", sysID)
             intent.putExtra("pumpId", pumpIds[id.toInt()])
             intent.putExtra("pump", pumpList[id.toInt()])
+            var a = adapter.getItem(position);
+            toSendSensorID = a.sensorName;
+            intent.putExtra("sensorID",toSendSensorID);
             startActivity(intent)
         }
     }
@@ -106,7 +112,7 @@ class HistorySelectPumpActivity : AppCompatActivity() {
                         var p = pump.getValue(Pump::class.java)
                         pumpIds.add(pump.key.toString())
                         pumpList.add(p!!)
-                        pumpListView.add(Box(p.name!!))
+                        pumpListView.add(SelectPumpHistoryBox("Máy bơm: " + p.name!!, "Sensor: " + p.soilMoistureID.toString()))
                         adapter.notifyDataSetChanged()
                     }
 

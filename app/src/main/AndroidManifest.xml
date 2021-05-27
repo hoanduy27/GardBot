@@ -18,6 +18,7 @@
         <activity android:name=".dashboard.DashboardActivity" />
         <activity android:name=".history.HistorySelectPumpActivity"/>
         <activity android:name=".history.HistoryPumpActivity"/>
+        <activity android:name=".history.HistoryDetailActivity"/>
         <activity android:name=".viewInfomation.ViewSoilDetailActivity"></activity>
         <activity android:name=".viewInfomation.ViewTemperatureInfoActivity" />
         <activity android:name=".viewInfomation.ViewPumpInfoActivity" />

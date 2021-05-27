@@ -1,6 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/history_inside"
+        android:layout_width="131dp"
+        android:layout_height="15dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.047" />
+    <TextView
+        android:id="@+id/pumpInf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.104"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.105" />
+
+    <TableLayout
+        android:layout_width="264dp"
+        android:layout_height="97dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.734"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pumpInf"
+        app:layout_constraintVertical_bias="0.024">
+
+        <TableRow>
+
+            <TextView
+                android:background="#c98282"
+                android:gravity="center"
+                android:text="" />
+
+            <TextView
+                android:layout_width="91dp"
+                android:background="#c98282"
+                android:gravity="center"
+                android:text="Bắt đầu" />
+
+            <TextView
+                android:layout_width="109dp"
+                android:background="#c98282"
+                android:gravity="center"
+                android:text="Kết thúc" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:background="#c98282"
+                android:gravity="center"
+                android:text="Thời gian" />
+
+            <TextView
+                android:id = "@+id/time_start"
+                android:background="#c98282"
+                android:gravity="center"
+                android:text="" />
+
+            <TextView
+                android:id = "@+id/time_end"
+                android:background="#c98282"
+                android:gravity="center"
+                android:text="" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:background="#c98282"
+                android:gravity="center"
+                android:text="Độ ẩm kk" />
+
+            <TextView
+                android:id = "@+id/air_moisture_begin"
+                android:background="#c98282"
+                android:gravity="center"
+                android:text="" />
+
+            <TextView
+                android:id = "@+id/air_moisture_end"
+                android:background="#c98282"
+                android:gravity="center"
+                android:text="" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:background="#c98282"
+                android:gravity="center"
+                android:text="Nhiệt độ" />
+
+            <TextView
+                android:id = "@+id/temp_begin"
+                android:background="#c98282"
+                android:gravity="center"
+                android:text="" />
+
+            <TextView
+                android:id = "@+id/temp_end"
+                android:background="#c98282"
+                android:gravity="center"
+                android:text="" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:background="#c98282"
+                android:gravity="center"
+                android:text="Độ ẩm đất" />
+
+            <TextView
+                android:id = "@+id/soil_moisture_begin"
+                android:background="#c98282"
+                android:gravity="center"
+                android:text="" />
+
+            <TextView
+                android:id = "@+id/soil_moisture_end"
+                android:background="#c98282"
+                android:gravity="center"
+                android:text="" />
+        </TableRow>
+    </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

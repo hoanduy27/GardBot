@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.get
 import com.example.gardbot.auth.AuthActivity
 import com.example.gardbot.R
 import com.example.gardbot.databinding.ActivityHistoryPumpBinding
@@ -28,7 +29,7 @@ class HistoryPumpActivity : AppCompatActivity() {
     private lateinit var sysID : String
     private lateinit var pumpId : String
     private lateinit var pump : Pump
-
+    private  lateinit var sensorId: String
     private val database = Firebase.database
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +43,8 @@ class HistoryPumpActivity : AppCompatActivity() {
         sysID = intent.getStringExtra("sysID")!!
         pumpId = intent.getStringExtra("pumpId")!!
         pump = intent.getSerializableExtra("pump") as Pump
+        sensorId = intent.getStringExtra("sensorID")!!
+        //Get intent data for later history
 
 
         //Create Adapter
@@ -56,6 +59,12 @@ class HistoryPumpActivity : AppCompatActivity() {
         //Event handlers
         binding.pumpHistory.setOnItemClickListener { parent, view : View, position, id : Long->
             //
+            var intent = Intent(this, HistoryDetailActivity::class.java)
+            var a = adapter.getItem(position)
+            intent.putExtra("hisLine",a.text)
+            intent.putExtra("pumpId",pumpId)
+            intent.putExtra("sensorId",sensorId);
+            startActivity(intent)
         }
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
