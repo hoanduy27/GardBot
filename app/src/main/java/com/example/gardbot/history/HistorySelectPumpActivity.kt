@@ -112,7 +112,6 @@ class HistorySelectPumpActivity : AppCompatActivity() {
 
                 }
             }
-
             override fun onCancelled(error: DatabaseError) {
 
             }

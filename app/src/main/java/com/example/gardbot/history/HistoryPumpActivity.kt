@@ -56,6 +56,7 @@ class HistoryPumpActivity : AppCompatActivity() {
         //Event handlers
         binding.pumpHistory.setOnItemClickListener { parent, view : View, position, id : Long->
             //
+
         }
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -108,6 +109,7 @@ class HistoryPumpActivity : AppCompatActivity() {
         val mRef = database.reference.child("history/watering").child(pumpId)
         mRef.addChildEventListener(object : ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+
                 historyList.add(Box(snapshot.key.toString()))
                 adapter.notifyDataSetChanged()
             }
