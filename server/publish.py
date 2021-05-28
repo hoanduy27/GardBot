@@ -87,7 +87,7 @@ class RandomPublisher:
                 random_humid = randint(0, 100)
                 value = {
                     "id": "7", 
-                    "name": "TEMP-HUMIT", 
+                    "name": "TEMP-HUMID", 
                     "data": f"{random_temp}-{random_humid}", 
                     "unit": "*C-%"
                 }
