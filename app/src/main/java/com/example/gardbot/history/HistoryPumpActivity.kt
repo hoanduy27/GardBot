@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.get
 import com.example.gardbot.auth.AuthActivity
@@ -23,13 +24,14 @@ class HistoryPumpActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHistoryPumpBinding
 
     private var historyList = ArrayList<Box>()
+    private lateinit var autoCheck: String
 
     private lateinit var adapter : BoxAdapter
     //intent data
     private lateinit var sysID : String
     private lateinit var pumpId : String
     private lateinit var pump : Pump
-    private  lateinit var sensorId: String
+    private  lateinit var sensorName: String
     private val database = Firebase.database
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +45,7 @@ class HistoryPumpActivity : AppCompatActivity() {
         sysID = intent.getStringExtra("sysID")!!
         pumpId = intent.getStringExtra("pumpId")!!
         pump = intent.getSerializableExtra("pump") as Pump
-        sensorId = intent.getStringExtra("sensorID")!!
+        sensorName = intent.getStringExtra("sensorName")!!
         //Get intent data for later history
 
 
@@ -63,7 +65,7 @@ class HistoryPumpActivity : AppCompatActivity() {
             var a = adapter.getItem(position)
             intent.putExtra("hisLine",a.text)
             intent.putExtra("pumpId",pumpId)
-            intent.putExtra("sensorId",sensorId);
+            intent.putExtra("sensorName",sensorName);
             startActivity(intent)
         }
     }
@@ -99,7 +101,7 @@ class HistoryPumpActivity : AppCompatActivity() {
     }*/
 
     fun setHeader(){
-        var pumpName = "Máy bơm ${pump.name}"
+        var pumpName = "Máy bơm: ${pump.name}"
         binding.pumpHistoryPumpName.text =  pumpName
         val mRef = database.reference.child("sensor/soilMoisture")
         mRef.addValueEventListener(object : ValueEventListener{
@@ -117,7 +119,11 @@ class HistoryPumpActivity : AppCompatActivity() {
         val mRef = database.reference.child("history/watering").child(pumpId)
         mRef.addChildEventListener(object : ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                historyList.add(Box(snapshot.key.toString()))
+                autoCheck = snapshot.child("autoStart").value.toString()
+                if(autoCheck == "1"){
+                    historyList.add(Box(snapshot.key.toString() + " Tưới tự động"))
+                    //Toast.makeText(this,"Alo alo",Toast.LENGTH_LONG).show()
+                }   else  historyList.add(Box(snapshot.key.toString()))
                 adapter.notifyDataSetChanged()
             }
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {

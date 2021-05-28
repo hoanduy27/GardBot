@@ -25,6 +25,7 @@ import com.google.firebase.ktx.Firebase
 class HistorySelectPumpActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityHistorySelectPumpBinding
+    private lateinit var sensorName: String
 
     private var pumpListView = ArrayList<SelectPumpHistoryBox>()
     private var pumpList = ArrayList<Pump>()
@@ -57,9 +58,8 @@ class HistorySelectPumpActivity : AppCompatActivity() {
             intent.putExtra("sysID", sysID)
             intent.putExtra("pumpId", pumpIds[id.toInt()])
             intent.putExtra("pump", pumpList[id.toInt()])
-            var a = adapter.getItem(position);
-            toSendSensorID = a.sensorName;
-            intent.putExtra("sensorID",toSendSensorID);
+            sensorName = adapter.getItem(position).sensorName
+            intent.putExtra("sensorName",sensorName);
             startActivity(intent)
         }
     }
@@ -112,7 +112,7 @@ class HistorySelectPumpActivity : AppCompatActivity() {
                         var p = pump.getValue(Pump::class.java)
                         pumpIds.add(pump.key.toString())
                         pumpList.add(p!!)
-                        pumpListView.add(SelectPumpHistoryBox("Máy bơm: " + p.name!!, "Sensor: " + p.soilMoistureID.toString()))
+                        pumpListView.add(SelectPumpHistoryBox("Máy bơm: " + p.name!!, "Sensor: " + soilSnapshot.child(p.soilMoistureID!!).child("name").value.toString()))
                         adapter.notifyDataSetChanged()
                     }
 

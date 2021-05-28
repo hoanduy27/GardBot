@@ -23,7 +23,7 @@ class HistoryDetailActivity: AppCompatActivity() {
     //intent data
     private lateinit var hisLine: String
     private lateinit var pumpId: String
-    private lateinit var sensorId: String
+    private lateinit var sensorName: String
     //Detail data
 
     private val database = Firebase.database
@@ -38,7 +38,7 @@ class HistoryDetailActivity: AppCompatActivity() {
         //Load intent data
         hisLine = intent.getStringExtra("hisLine")!!
         pumpId = intent.getStringExtra("pumpId")!!
-        sensorId = intent.getStringExtra("sensorId")!!
+        sensorName = intent.getStringExtra("sensorName")!!
         //Detail
 
 
@@ -86,7 +86,7 @@ class HistoryDetailActivity: AppCompatActivity() {
         val mRef = database.reference.child("history/watering").child(pumpId)
         mRef.addChildEventListener(object : ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                binding.pumpInf.text = "Sensor: " + sensorId;
+                binding.pumpInf.text = sensorName;
                 binding.timeStart.text = snapshot.child("startTime").getValue().toString();
                 binding.timeEnd.text  = snapshot.child("endtime").getValue().toString();
                 binding.airMoistureBegin.text = snapshot.child("humidityStart").getValue().toString();
