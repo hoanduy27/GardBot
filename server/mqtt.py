@@ -2,7 +2,7 @@ import sys
 import json
 import yaml
 import time
-from Adafruit_IO import MQTTClient, Client
+from Adafruit_IO import MQTTClient
 from firebaseLog import LogApp
 from datetime import date, datetime
 from threading import Thread
@@ -15,31 +15,31 @@ class MQTT:
         with open('config.yml') as conf:
             config = yaml.safe_load(conf)
 
+        # Load config from test_server
+        username = config['IO_USERNAME']
+        key = config['IO_KEY']
         pump = config['feed']['output']
         sensor = config['feed']['input']['sensor']
         tempHumid = config['feed']['input']['tempHumid']
         
+        # Load config from real servers
         bbc = config['realServer']
+        bbc_username = bbc['USERNAME']
+        bbc_key = bbc['KEY']
         #pump_bbc = bbc['relay']
         sensor_bbc = bbc['soil']
         #tempHumid_bbc = bbc['dht']
 
-        # Change when we have official announcement about json format
-        username = config['IO_USERNAME']
-        key = config['IO_KEY']
-
-        bbc_username = config['IO_BBC']['USERNAME']
-        bbc_key = config['IO_BBC']['KEY']
-
+        # Test server
         self.client = [MQTTClient(username, key)]
-        self.client += [MQTTClient(bbc_username, bbc_key)]
+        # Real servers
+        self.client += [MQTTClient(bbc_username[i], bbc_key[i]) for i in range(len(bbc_key))]
 
         self.pump = {key: {'owner': username, 'value': None} for key in pump}
         #self.pump.update({pump_bbc['feedId']: {'owner': pump_bbc['IO_OWNER'], 'value': None}})
 
         self.sensor = {key: {'owner': username, 'value': None} for key in sensor}
         self.sensor.update({sensor_bbc['feedId']: {'owner': sensor_bbc['IO_OWNER'], 'value': None}})
-        print(self.sensor)
 
         self.tempHumid = {key: {'owner': username, 'temp': None, 'humid': None} for key in tempHumid}
         #self.sensor.update({tempHumid_bbc['feedId']: {'owner': sensor_bbc['IO_OWNER'], 'temp': None, 'humid':None}})
@@ -50,7 +50,6 @@ class MQTT:
         self.writeHistory_loop.daemon = True
         
         def connected(client):
-            print(client._username) 
             for feed_id in self.pump:
                 if client._username == self.pump[feed_id]['owner']:
                     client.subscribe(feed_id=feed_id)
@@ -105,7 +104,7 @@ class MQTT:
             client.connect()
             
         self.writeHistory_loop.start()
-        
+
         for client in self.client: 
             client.loop_background()
         
