@@ -9,7 +9,7 @@
 
     <TextView
         android:drawableRight="@drawable/ic_auto"
-        android:id="@+id/inside_history_selection"
+        android:id="@+id/pump_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Information"

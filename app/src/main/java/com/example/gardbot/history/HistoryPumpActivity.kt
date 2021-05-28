@@ -6,11 +6,13 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import com.example.gardbot.auth.AuthActivity
 import com.example.gardbot.R
@@ -24,7 +26,6 @@ class HistoryPumpActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHistoryPumpBinding
 
     private var historyList = ArrayList<Box>()
-    private lateinit var autoCheck: String
 
     private lateinit var adapter : BoxAdapter
     //intent data
@@ -62,10 +63,10 @@ class HistoryPumpActivity : AppCompatActivity() {
         binding.pumpHistory.setOnItemClickListener { parent, view : View, position, id : Long->
             //
             var intent = Intent(this, HistoryDetailActivity::class.java)
-            var a = adapter.getItem(position)
-            intent.putExtra("hisLine",a.text)
-            intent.putExtra("pumpId",pumpId)
-            intent.putExtra("sensorName",sensorName);
+            var timestamp = adapter.getItem(position)
+            intent.putExtra("timestamp", timestamp.text)
+            intent.putExtra("pumpId", pumpId)
+            intent.putExtra("sensorName", sensorName)
             startActivity(intent)
         }
     }
@@ -119,11 +120,13 @@ class HistoryPumpActivity : AppCompatActivity() {
         val mRef = database.reference.child("history/watering").child(pumpId)
         mRef.addChildEventListener(object : ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                autoCheck = snapshot.child("autoStart").value.toString()
-                if(autoCheck == "1"){
-                    historyList.add(Box(snapshot.key.toString() + " Tưới tự động"))
-                    //Toast.makeText(this,"Alo alo",Toast.LENGTH_LONG).show()
-                }   else  historyList.add(Box(snapshot.key.toString()))
+                val autoStart = if(snapshot.child("autoStart").value.toString() == "1"){1} else {0}
+                val autoEnd = if(snapshot.child("autoEnd").value.toString() == "1"){1} else {0}
+
+                val auto_ic= if(autoStart + autoEnd > 0){R.drawable.ic_auto} else {0}
+
+                historyList.add(Box(snapshot.key.toString(), auto_ic))
+
                 adapter.notifyDataSetChanged()
             }
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {

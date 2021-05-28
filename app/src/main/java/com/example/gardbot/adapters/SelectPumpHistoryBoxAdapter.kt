@@ -21,7 +21,7 @@ data class SelectPumpHistoryBoxAdapter (val boxList: ArrayList<SelectPumpHistory
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view = View.inflate(activity, R.layout.layout_history_selection, null)
+        val view = View.inflate(activity, R.layout.layout_history_select_pump, null)
         val sensorText = view.findViewById<TextView>(R.id.history_Sensor)
             sensorText.text = boxList[position]._sensorName
         val pumpText = view.findViewById<TextView>(R.id.history_pump)
