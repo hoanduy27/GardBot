@@ -6,7 +6,12 @@ import time
 from Adafruit_IO import MQTTClient, Client
 from threading import Thread
 
+
 class RandomPublisher:
+    """
+    This class is used for testing only, not being used in Flask server.
+    Publish random value on gardbot's sensor feeds.
+    """
     def __init__(self):
         with open('config.yml') as conf:
             config = yaml.safe_load(conf)
@@ -87,7 +92,5 @@ class RandomPublisher:
                     "unit": "*C-%"
                 }
                 self.send_feed_data(feed_id, json.dumps(value))
-
-                
 
 mqtt = RandomPublisher()

@@ -9,7 +9,7 @@ from threading import Thread
 
 class MQTT:
     def __init__(self):
-        self.POOL_TIME = 10
+        self.POOL_TIME = 20
         self.TIME_FORMAT = "%d-%m-%y-%H:%M:%S"
 
         with open('config.yml') as conf:
