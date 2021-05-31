@@ -21,6 +21,7 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.example.gardbot.model.Session
+import com.example.gardbot.pumpControl.PumpControlActivity
 
 class SystemActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySystemBinding
@@ -59,7 +60,8 @@ class SystemActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             else if(id == 1L) {
-                intent = Intent(this, ActivityPump::class.java)
+                intent = Intent(this, PumpControlActivity::class.java)
+                intent.putExtra("sysID", sysID)
                 startActivity(intent)
             }
 

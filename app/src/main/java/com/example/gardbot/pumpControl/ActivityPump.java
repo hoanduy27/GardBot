@@ -17,20 +17,6 @@ public class ActivityPump extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_controlpump);
-        recview=(RecyclerView)findViewById(R.id.recview);
-        recview.setLayoutManager(new LinearLayoutManager(this));
-
-        FirebaseRecyclerOptions<model> options =
-                new FirebaseRecyclerOptions.Builder<model>()
-                        .setQuery(FirebaseDatabase
-                                .getInstance()
-                                .getReference()
-                                .child("pump"),
-                                model.class
-                        )
-                        .build();
-        adapter= new myAdapter(options);
-        recview.setAdapter(adapter);
     }
     @Override
     protected void onStart() {
