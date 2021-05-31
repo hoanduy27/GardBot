@@ -2,6 +2,7 @@ from flask import Flask
 from flask import render_template, request, redirect, url_for, jsonify, make_response
 import threading
 import atexit
+import json
 from mqtt import MQTT
 
 mqtt = MQTT()
@@ -17,9 +18,9 @@ def send_pump_signal():
         "data": f"{value}",
         "unit": ""
     }
-    mqtt.send_feed_data(feed_id, value)
+
+    mqtt.send_feed_data(feed_id, json.dumps(value))
     return 'OK'       
 
 if __name__ == '__main__':
-    
     app.run(port = 5000, debug = True)

@@ -31,9 +31,9 @@ class MQTT:
         #tempHumid_bbc = bbc['dht']
 
         # Test server
-        self.client = [MQTTClient(username, key)]
+        self.client = {username: MQTTClient(username, key)}
         # Real servers
-        self.client += [MQTTClient(bbc_username[i], bbc_key[i]) for i in range(len(bbc_key))]
+        self.client.update({bbc_username[i]: MQTTClient(bbc_username[i], bbc_key[i]) for i in range(len(bbc_key))})
 
         self.pump = {key: {'owner': username, 'value': None} for key in pump}
         #self.pump.update({pump_bbc['feedId']: {'owner': pump_bbc['IO_OWNER'], 'value': None}})
@@ -96,7 +96,7 @@ class MQTT:
             print("Subscribe pumps and sensors")
             #print('Subscribed to {0} with QoS {1}'.format(userdata, granted_qos[0]))
 
-        for client in self.client:
+        for client in self.client.values():
             client.on_connect = connected
             client.on_message = message
             client.on_disconnect = disconnected
@@ -105,12 +105,13 @@ class MQTT:
             
         self.writeHistory_loop.start()
 
-        for client in self.client: 
+        for client in self.client.values():
             client.loop_background()
         
 
     def send_feed_data(self, feed_id, value):
-        self.client.publish(feed_id, value)
+        client = self.client[self.pump[feed_id]['owner']]
+        client.publish(feed_id, value)
 
     def writeSensorHistory(self):
         while True:
