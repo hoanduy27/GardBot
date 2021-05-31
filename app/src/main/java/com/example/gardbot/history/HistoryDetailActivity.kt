@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -36,11 +37,10 @@ class HistoryDetailActivity: AppCompatActivity() {
         setContentView(binding.root)
 
         //Load intent data
-        hisLine = intent.getStringExtra("hisLine")!!
+        hisLine = intent.getStringExtra("timestamp")!!
         pumpId = intent.getStringExtra("pumpId")!!
         sensorName = intent.getStringExtra("sensorName")!!
         //Detail
-
 
         //Add history
         addHistory()
@@ -81,28 +81,35 @@ class HistoryDetailActivity: AppCompatActivity() {
 
     fun addHistory(){
         binding.historyInside.text = hisLine
+
     }
     fun addDetail(){
-        val mRef = database.reference.child("history/watering").child(pumpId)
-        mRef.addChildEventListener(object : ChildEventListener{
-            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+        val mRef = database.reference.child("history/watering").child(pumpId).child(hisLine)
+        mRef.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val autoStart = if(snapshot.child("autoStart").value.toString() == "1") {1} else {0}
+                val autoEnd = if(snapshot.child("autoEnd").value.toString() == "1") {1} else {0}
+
+                val autoStart_ic = if(autoStart == 1){R.drawable.ic_auto} else {0}
+                val autoEnd_ic = if(autoEnd == 1){R.drawable.ic_auto} else {0}
+
+                val auto_ic = if(autoStart + autoEnd > 0){R.drawable.ic_auto} else {0}
+
+                binding.historyInside.setCompoundDrawablesWithIntrinsicBounds(0, 0, auto_ic, 0)
+
                 binding.pumpInf.text = sensorName;
-                binding.timeStart.text = snapshot.child("startTime").getValue().toString();
-                binding.timeEnd.text  = snapshot.child("endtime").getValue().toString();
-                binding.airMoistureBegin.text = snapshot.child("humidityStart").getValue().toString();
-                binding.airMoistureEnd.text = snapshot.child("humidityEnd").getValue().toString();
-                binding.soilMoistureBegin.text = snapshot.child("moistureStart").getValue().toString();
-                binding.soilMoistureEnd.text = snapshot.child("moistureEnd").getValue().toString();
-                binding.tempBegin.text = snapshot.child("temperatureStart").getValue().toString();
-                binding.tempEnd.text = snapshot.child("temperatureEnd").getValue().toString();
-            }
-            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-            }
+                binding.timeStart.text = snapshot.child("startTime").value.toString();
+                binding.timeStart.setCompoundDrawablesWithIntrinsicBounds(0,0,autoStart_ic,0)
 
-            override fun onChildRemoved(snapshot: DataSnapshot) {
-            }
+                binding.timeEnd.text  = snapshot.child("endtime").value.toString();
+                binding.timeEnd.setCompoundDrawablesWithIntrinsicBounds(0,0,autoEnd_ic,0)
 
-            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                binding.airMoistureBegin.text = snapshot.child("humidityStart").value.toString();
+                binding.airMoistureEnd.text = snapshot.child("humidityEnd").value.toString();
+                binding.soilMoistureBegin.text = snapshot.child("moistureStart").value.toString();
+                binding.soilMoistureEnd.text = snapshot.child("moistureEnd").value.toString();
+                binding.tempBegin.text = snapshot.child("temperatureStart").value.toString();
+                binding.tempEnd.text = snapshot.child("temperatureEnd").value.toString();
             }
 
             override fun onCancelled(error: DatabaseError) {

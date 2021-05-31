@@ -8,16 +8,8 @@
     android:layout_weight="0.5">
 
     <TextView
-        android:id="@+id/history_Sensor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Information"
-        android:padding="10dp"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:background = "@drawable/rounded_border"/>
-    <TextView
-        android:id = "@+id/history_pump"
+        android:drawableRight="@drawable/ic_auto"
+        android:id="@+id/pump_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Information"

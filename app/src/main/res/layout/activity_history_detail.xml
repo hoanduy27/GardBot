@@ -1,138 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/history_inside"
-        android:layout_width="131dp"
-        android:layout_height="15dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.047" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:textColor="@color/black"
+        android:background="@drawable/rounded_border"
+        android:text="Time" />
     <TextView
         android:id="@+id/pumpInf"
-        android:layout_width="wrap_content"
+        android:textColor="@color/black"
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.104"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.105" />
+        android:text="Sensor" />
 
     <TableLayout
-        android:layout_width="264dp"
-        android:layout_height="97dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.734"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pumpInf"
-        app:layout_constraintVertical_bias="0.024">
-
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
         <TableRow>
-
             <TextView
-                android:background="#c98282"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="" />
 
             <TextView
-                android:layout_width="91dp"
-                android:background="#c98282"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:layout_weight="2"
                 android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="20sp"
                 android:text="Bắt đầu" />
 
             <TextView
-                android:layout_width="109dp"
-                android:background="#c98282"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:layout_weight="2"
                 android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="20sp"
                 android:text="Kết thúc" />
         </TableRow>
 
         <TableRow>
 
             <TextView
-                android:background="#c98282"
-                android:gravity="center"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textSize="20sp"
                 android:text="Thời gian" />
 
             <TextView
                 android:id = "@+id/time_start"
-                android:background="#c98282"
+                android:background="@color/white"
+                android:textColor="@color/black"
                 android:gravity="center"
-                android:text="" />
+                android:textSize="20sp"
+                android:layout_weight="2"
+                android:text="12:00" />
 
             <TextView
                 android:id = "@+id/time_end"
-                android:background="#c98282"
+                android:background="@color/white"
+                android:textColor="@color/black"
                 android:gravity="center"
-                android:text="" />
+                android:layout_weight="2"
+                android:textSize="20sp"
+                android:text="x" />
         </TableRow>
 
         <TableRow>
             <TextView
-                android:background="#c98282"
-                android:gravity="center"
-                android:text="Độ ẩm kk" />
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="Độ ẩm không khí" />
 
             <TextView
                 android:id = "@+id/air_moisture_begin"
-                android:background="#c98282"
+                android:background="@color/white"
+                android:textColor="@color/black"
                 android:gravity="center"
-                android:text="" />
+                android:layout_weight="2"
+                android:textSize="20sp"
+                android:text="x" />
 
             <TextView
                 android:id = "@+id/air_moisture_end"
-                android:background="#c98282"
+                android:background="@color/white"
+                android:textColor="@color/black"
                 android:gravity="center"
-                android:text="" />
+                android:layout_weight="2"
+                android:textSize="20sp"
+                android:text="x" />
         </TableRow>
         <TableRow>
             <TextView
-                android:background="#c98282"
-                android:gravity="center"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textSize="20sp"
                 android:text="Nhiệt độ" />
 
             <TextView
                 android:id = "@+id/temp_begin"
-                android:background="#c98282"
+                android:background="@color/white"
+                android:textColor="@color/black"
                 android:gravity="center"
-                android:text="" />
+                android:layout_weight="2"
+                android:textSize="20sp"
+                android:text="x" />
 
             <TextView
                 android:id = "@+id/temp_end"
-                android:background="#c98282"
+                android:background="@color/white"
+                android:textColor="@color/black"
                 android:gravity="center"
-                android:text="" />
+                android:layout_weight="2"
+                android:textSize="20sp"
+                android:text="x" />
         </TableRow>
 
         <TableRow>
 
             <TextView
-                android:background="#c98282"
-                android:gravity="center"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textSize="20sp"
                 android:text="Độ ẩm đất" />
 
             <TextView
                 android:id = "@+id/soil_moisture_begin"
-                android:background="#c98282"
+                android:background="@color/white"
+                android:textColor="@color/black"
                 android:gravity="center"
-                android:text="" />
+                android:layout_weight="2"
+                android:textSize="20sp"
+                android:text="x" />
 
             <TextView
                 android:id = "@+id/soil_moisture_end"
-                android:background="#c98282"
+                android:background="@color/white"
+                android:textColor="@color/black"
                 android:gravity="center"
-                android:text="" />
+                android:layout_weight="2"
+                android:textSize="20sp"
+                android:text="x" />
         </TableRow>
     </TableLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
