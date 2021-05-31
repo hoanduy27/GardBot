@@ -8,10 +8,28 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+<<<<<<< Updated upstream
         android:theme="@style/Theme.GardBot">
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".ActivityPump"
             android:exported="true"/>
+=======
+        android:theme="@style/Theme.GardBot"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".pumpControl.PumpControlActivity"/>
+        <activity android:name=".dashboard.SystemActivity" />
+        <activity android:name=".dashboard.DashboardActivity" />
+        <activity android:name=".history.HistorySelectPumpActivity" />
+        <activity android:name=".history.HistoryPumpActivity" />
+        <activity android:name=".history.HistoryDetailActivity" />
+        <activity android:name=".viewInfomation.ViewSoilDetailActivity" />
+        <activity android:name=".viewInfomation.ViewTemperatureInfoActivity" />
+        <activity android:name=".viewInfomation.ViewPumpInfoActivity" />
+        <activity android:name=".viewInfomation.ViewHumidityInfoActivity" />
+        <activity android:name=".viewInfomation.ViewSoilInfoActivity" />
+        <activity android:name=".viewInfomation.ViewInfomationActivity" />
+        <activity android:name=".DemoActivity" />
+>>>>>>> Stashed changes
         <activity
             android:name=".AuthActivity"
             android:label="@string/app_name"

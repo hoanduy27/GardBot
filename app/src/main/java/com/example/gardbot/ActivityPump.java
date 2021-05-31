@@ -16,6 +16,7 @@ public class ActivityPump extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_controlpump);
+<<<<<<< Updated upstream:app/src/main/java/com/example/gardbot/ActivityPump.java
         recview=(RecyclerView)findViewById(R.id.recview);
         recview.setLayoutManager(new LinearLayoutManager(this));
 
@@ -23,6 +24,8 @@ public class ActivityPump extends AppCompatActivity {
                 new FirebaseRecyclerOptions.Builder<model>().setQuery(FirebaseDatabase.getInstance().getReference().child("pump"), model.class).build();
         adapter= new myAdapter(options);
         recview.setAdapter(adapter);
+=======
+>>>>>>> Stashed changes:app/src/main/java/com/example/gardbot/pumpControl/ActivityPump.java
     }
     @Override
     protected void onStart() {
