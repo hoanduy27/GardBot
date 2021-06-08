@@ -1,0 +1,9 @@
+IO_USERNAME: gardbot
+IO_KEY: aio_YvkL59EbVWwMsqyuCLWpXn7outeQ
+feed:
+  input:
+  - s0001
+  output:
+  - pump1
+  - pump2
+  - pump3

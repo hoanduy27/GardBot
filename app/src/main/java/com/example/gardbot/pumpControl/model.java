@@ -1,4 +1,4 @@
-package com.example.gardbot;
+package com.example.gardbot.pumpControl;
 
 public class model {
     String name, soilMoistureID;

@@ -1,6 +1,5 @@
 package com.example.gardbot.adapters
 
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -8,8 +7,8 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import com.example.gardbot.R
 
-data class BoxAdapter (val boxList: ArrayList<Box>, val activity : FragmentActivity?) : BaseAdapter(){
-    override fun getItem(position: Int): Box {
+data class SelectPumpHistoryBoxAdapter (val boxList: ArrayList<SelectPumpHistoryBox>, val activity : FragmentActivity?) : BaseAdapter(){
+    override fun getItem(position: Int): SelectPumpHistoryBox {
         return boxList[position]
     }
 
@@ -22,10 +21,11 @@ data class BoxAdapter (val boxList: ArrayList<Box>, val activity : FragmentActiv
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view = View.inflate(activity, R.layout.layout_history_pump, null)
-        val textView = view.findViewById<TextView>(R.id.pump_history)
-        textView.text = boxList[position].text
-        textView.setCompoundDrawablesWithIntrinsicBounds(0, 0, boxList[position].drawable,0)
+        val view = View.inflate(activity, R.layout.layout_history_select_pump, null)
+        val sensorText = view.findViewById<TextView>(R.id.history_Sensor)
+            sensorText.text = boxList[position]._sensorName
+        val pumpText = view.findViewById<TextView>(R.id.history_pump)
+            pumpText.text = boxList[position].pumpName
         return view
     }
 }

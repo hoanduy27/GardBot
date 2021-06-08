@@ -8,7 +8,7 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ActivityPump"
+    tools:context=".pumpControl.ActivityPump"
     android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
