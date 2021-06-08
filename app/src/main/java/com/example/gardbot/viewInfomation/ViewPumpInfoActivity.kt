@@ -44,10 +44,10 @@ class ViewPumpInfoActivity : AppCompatActivity() {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 var cur_pump : Pump = snapshot.getValue(Pump::class.java)!!
                 pumpList.add(cur_pump)
-                Log.d("-------------pump auto--------------", cur_pump.auto!!.toString())
-                Log.d("-------------pump name--------------", cur_pump.name!!.toString())
-                Log.d("-------------pump soil--------------", cur_pump.soilMoistureID!!.toString())
-                Log.d("-------------pump water level--------------", cur_pump.waterLevel!!.toString())
+//                Log.d("-------------pump auto--------------", cur_pump.auto!!.toString())
+//                Log.d("-------------pump name--------------", cur_pump.name!!.toString())
+//                Log.d("-------------pump soil--------------", cur_pump.soilMoistureID!!.toString())
+//                Log.d("-------------pump water level--------------", cur_pump.waterLevel!!.toString())
                 adapter.notifyDataSetChanged()
             }
 
