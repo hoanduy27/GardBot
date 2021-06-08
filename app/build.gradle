@@ -37,7 +37,7 @@ android {
     sourceSets {
         main {
             res {
-                srcDirs 'src/main/res', 'src/main/res/layouts/login', 'src/main/res/layouts/dashboard', 'src/main/res/layouts/history'
+                srcDirs 'src/main/res', 'src/main/res/layouts/login', 'src/main/res/layouts/dashboard', 'src/main/res/layouts/history', 'src/main/res/layouts/viewInfo', 'src/main/res/layouts/pumpControl'
             }
         }
     }
