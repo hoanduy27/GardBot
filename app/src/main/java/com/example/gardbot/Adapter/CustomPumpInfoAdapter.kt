@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.example.gardbot.Model.Pump
-import com.example.gardbot.Model.SoilSensor
+import com.example.gardbot.model.SoilSensor
 import com.example.gardbot.R
 
 class CustomPumpInfoAdapter(var ctx: Context, var resource : Int, var Items: ArrayList<Pump>) : ArrayAdapter<Pump>(ctx, resource, Items) {
