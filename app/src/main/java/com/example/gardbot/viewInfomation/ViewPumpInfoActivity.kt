@@ -7,10 +7,10 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.ListView
 import com.example.gardbot.Adapter.CustomPumpInfoAdapter
-import com.example.gardbot.Adapter.CustomSoilDetailAdapter
+import com.example.gardbot.adapters.CustomSoilDetailAdapter
 import com.example.gardbot.Model.Pump
-import com.example.gardbot.Model.SoilHistory
-import com.example.gardbot.Model.SoilSensor
+import com.example.gardbot.model.SoilHistory
+import com.example.gardbot.model.SoilSensor
 import com.example.gardbot.R
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
