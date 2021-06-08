@@ -12,7 +12,7 @@ class MQTT:
         self.POOL_TIME = 20
         self.TIME_FORMAT = "%d-%m-%y-%H:%M:%S"
 
-        with open('config.yml') as conf:
+        with open('./config.yml') as conf:
             config = yaml.safe_load(conf)
 
         # Load config from test_server
