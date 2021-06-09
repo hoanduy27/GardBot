@@ -65,6 +65,9 @@ class MQTT:
                     client.subscribe(feed_id=feed_id, feed_user=self.tempHumid[feed_id]['owner'])
                     client.receive(feed_id)
 
+	    #self.pumpHistory = {key: {autoEnd:None, autoStart:  None, ...} for key in pump}
+
+
         def message(client, feed_id, payload):
             #print(payload)
             payload = json.loads(payload)
@@ -73,11 +76,16 @@ class MQTT:
             if(feed_id in self.pump):
                 self.pump[feed_id]['value'] = value
                 self.logApp.changePumpStatus(feed_id, value)
+			## 1: #autoStart == None 
+				#self.pumpHistory[key][autoStart] = ..
+				#self.pumpHistory[key][startTime ] = ..
+			## 0: [autoEnd]. [endTime] ....., write, set to None
 
             elif(feed_id in self.sensor):   
                 self.sensor[feed_id]['value'] = value
                 self.logApp.changeSoilMoisute(feed_id, value)
-            
+		    # Change waterlevel if auto status of this pump is enable (use prdict model): sendFeedData(pumpID, predictValue)
+			            
             elif(feed_id in self.tempHumid):
                 value = value.split('-')
                 self.tempHumid[feed_id]['temp'] = value[0]

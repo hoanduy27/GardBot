@@ -22,6 +22,7 @@ class LogApp:
             self.db, 
             authentication=self.authentication
         )        
+
         
     def changePumpStatus(self, feed_id, value):
         self.app.put('/pump/' + feed_id, 'waterLevel', value)
@@ -55,3 +56,11 @@ class LogApp:
             history.keys())
         )
         return min(time_records).strftime(self.TIME_FORMAT)
+
+    def getPump(self, sensor_id):
+        pass
+    
+    def writePumpHistory(self, feed_id, value, timestamp):
+        pass
+
+    
