@@ -85,6 +85,11 @@
                 android:text="PumpNameHere"
                 android:textSize="20sp" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/pumpid"
+                android:text="pumpidhere"/>
             <LinearLayout
                 android:id="@+id/info"
                 android:layout_width="wrap_content"
@@ -103,48 +108,6 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="30dp"
-                        android:text="Thời gian:"
-                        android:textSize="21sp" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/back">
-
-                        <EditText
-                            android:id="@+id/hours"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@null"
-                            android:gravity="center_horizontal"
-                            android:inputType="time"
-                            android:paddingLeft="20sp"
-                            android:text="00"
-                            android:textSize="20sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:text=":"
-                            android:textSize="20sp" />
-
-                        <EditText
-                            android:id="@+id/minutes"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@null"
-                            android:gravity="center_horizontal"
-                            android:inputType="time"
-                            android:text="00"
-                            android:textSize="20sp" />
-                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
