@@ -80,6 +80,7 @@ class ViewPumpInfoActivity : AppCompatActivity() {
     private fun moveToPumpSetting() {
         intent = Intent(this, ViewInfomationActivity::class.java)
 //        intent = Intent(this, ActivityPump::class.java)
+//        intent = Intent(this, PumpControlActivity::class.java)
         startActivity(intent)
     }
 }

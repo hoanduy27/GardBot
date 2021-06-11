@@ -35,6 +35,7 @@ class ViewSoilInfoActivity : AppCompatActivity() {
         myRef.addChildEventListener(object : ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 var cur_soil : SoilSensor = snapshot.getValue(SoilSensor::class.java)!!
+                cur_soil.key = snapshot.key
                 curSoilList.add(cur_soil)
                 adapter.notifyDataSetChanged()
             }

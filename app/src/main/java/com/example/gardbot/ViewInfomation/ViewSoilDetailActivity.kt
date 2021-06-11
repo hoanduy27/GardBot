@@ -2,6 +2,7 @@ package com.example.gardbot.ViewInfomation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.ListView
@@ -25,7 +26,7 @@ class ViewSoilDetailActivity : AppCompatActivity() {
     lateinit var listViewSoilHistory : ListView
 
     val database = Firebase.database
-    val myRef = database.getReference().child("history").child("moisture")
+    var myRef = database.getReference().child("history")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +34,9 @@ class ViewSoilDetailActivity : AppCompatActivity() {
 
         var textCurSoil = findViewById<TextView>(R.id.textCurSoil)
         val curSoil = intent.getSerializableExtra("cur_soil") as SoilSensor
-        textCurSoil.text = curSoil.moisture + "%"
+        myRef = myRef.child("moisture").child(curSoil.key.toString())
+//        Log.d("---abcdef--------", myRef.toString())
+        textCurSoil.text = curSoil.moisture
 
         if (curSoil.moisture!!.toInt() < 10)
             findViewById<LinearLayout>(R.id.linearLayoutCurSoil).setBackgroundResource(R.drawable.custom_info_warning)
@@ -44,8 +47,10 @@ class ViewSoilDetailActivity : AppCompatActivity() {
 
         myRef.addChildEventListener(object : ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+//                Log.d("xzy", "hmm")
                 var time = snapshot.key
                 var value = snapshot.child("value").getValue(String::class.java)
+//                Log.d("----child add-----", time.toString() + value.toString())
                 soilHistoryList.add(SoilHistory(time!!, value!!))
                 adapter.notifyDataSetChanged()
             }

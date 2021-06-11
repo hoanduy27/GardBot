@@ -21,7 +21,7 @@ class CustomSoilDetailAdapter (var ctx: Context, var resource : Int, var Items: 
 
         // set item data
         leftPart.text = Items[position].time
-        rightPart.text = Items[position].value + "%"
+        rightPart.text = Items[position].value
 
 
         if (Items[position]!!.value!!.toInt()  < 10){

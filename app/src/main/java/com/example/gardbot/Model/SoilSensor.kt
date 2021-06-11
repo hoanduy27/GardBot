@@ -6,4 +6,5 @@ class SoilSensor : Serializable{
     var moisture : String? = null
     var name : String? = null
     var sysID : String? = null
+    var key : String? = null
 }

@@ -20,7 +20,7 @@ class CustomCurSoilAdapter(var ctx:Context, var resource : Int, var Items: Array
 
         // set item data
         leftPart.text = Items[position].name?.substringBefore(' ')
-        rightPart.text = Items[position].moisture + "%"
+        rightPart.text = Items[position].moisture
 
 
         if (Items[position]!!.moisture!!.toInt()  < 10)
