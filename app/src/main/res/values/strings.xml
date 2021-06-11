@@ -31,7 +31,7 @@
     <string name="sign_up">Random betwwen 0 and %d</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="txt_noaccount">Chưa có tài khoản? Đăng ký mới!</string>
+    <string name="txt_noaccount">Chưa có tài khoản? <u>Đăng ký mới!</u></string>
 
     <string name="viewDetail"><u>Xem chi tiết</u></string>
     <string name="viewInfo">Xem thông tin</string>
