@@ -22,7 +22,7 @@ class ViewTemperatureInfoActivity : AppCompatActivity() {
     lateinit var listViewTemperatureHistory : ListView
 
     val database = Firebase.database
-    val myRef = database.getReference().child("history").child("temperature")
+    val myRef = database.getReference().child("history").child("temperature").child("dht0001")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

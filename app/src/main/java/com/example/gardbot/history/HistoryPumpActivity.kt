@@ -120,13 +120,13 @@ class HistoryPumpActivity : AppCompatActivity() {
         val mRef = database.reference.child("history/watering").child(pumpId)
         mRef.addChildEventListener(object : ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+
                 val autoStart = if(snapshot.child("autoStart").value.toString() == "1"){1} else {0}
                 val autoEnd = if(snapshot.child("autoEnd").value.toString() == "1"){1} else {0}
 
                 val auto_ic= if(autoStart + autoEnd > 0){R.drawable.ic_auto} else {0}
 
                 historyList.add(Box(snapshot.key.toString(), auto_ic))
-
                 adapter.notifyDataSetChanged()
             }
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {

@@ -21,7 +21,6 @@ class CustomCurSoilAdapter(var ctx:Context, var resource : Int, var Items: Array
         leftPart.text = Items[position].name?.substringBefore(' ')
         rightPart.text = Items[position].moisture + "%"
 
-
         if (Items[position]!!.moisture!!.toInt()  < 10)
             view.setBackgroundResource(R.drawable.custom_info_warning)
 

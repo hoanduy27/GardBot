@@ -23,7 +23,7 @@ class ViewHumidityInfoActivity : AppCompatActivity() {
     lateinit var listViewHumidityHistory : ListView
 
     val database = Firebase.database
-    val myRef = database.getReference().child("history").child("humidity")
+    val myRef = database.getReference().child("history").child("humidity").child("dht0001")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

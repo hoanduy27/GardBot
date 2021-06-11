@@ -1,8 +1,6 @@
-from firebase import firebase
+
 from firebase.firebase import FirebaseApplication, FirebaseAuthentication
-from firebase import jsonutil
-import json
-from datetime import date, datetime
+from datetime import datetime
 import yaml
 
 class LogApp:
@@ -24,25 +22,28 @@ class LogApp:
             self.db, 
             authentication=self.authentication
         )        
+
         
     def changePumpStatus(self, feed_id, value):
         self.app.put('/pump/' + feed_id, 'waterLevel', value)
 
     def changeSoilMoisute(self, feed_id, value):
         self.app.put('/sensor/soilMoisture/' + feed_id, 'moisture', value)
+    def changeTempHumid(self, feed_id, temperature, humidity):
+        self.app.put('/sensor/dht/' + feed_id, 'temperature', temperature)
+        self.app.put('/sensor/dht/' + feed_id, 'humidity', humidity)
 
-    def writeSensorHistory(self, feed_id, value):
-        path = 'history/moisture/'
+    def writeSensorHistory(self, collection_name, feed_id, value, timestamp):
+        path = f'history/{collection_name}/'
 
         # Delete last record if number of records in this sensor > MAX_RECORD
         collection = self.app.get(path, feed_id)
         if(collection != None and len(collection) >= self.MAX_RECORD):
-            self.deleteLastHistoryRecord('moisture', feed_id)
+            self.deleteLastHistoryRecord(collection_name, feed_id)
 
         # Create history 
         json_data = {'value' : value}
-        current_time = datetime.now().strftime(self.TIME_FORMAT)
-        self.app.put(path + feed_id, current_time, json_data)
+        self.app.put(path + feed_id, timestamp, json_data)
 
     def deleteLastHistoryRecord(self, collection, feed_id):
         key = self.lastHistoryRecord(collection, feed_id)
@@ -55,3 +56,11 @@ class LogApp:
             history.keys())
         )
         return min(time_records).strftime(self.TIME_FORMAT)
+
+    def getPump(self, sensor_id):
+        pass
+    
+    def writePumpHistory(self, feed_id, value, timestamp):
+        pass
+
+    
