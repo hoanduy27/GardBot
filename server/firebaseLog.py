@@ -59,8 +59,10 @@ class LogApp:
 
     def getPump(self, sensor_id):
         pass
+
+    def isAuto(self, pump_id):
+        pass 
     
     def writePumpHistory(self, feed_id, value, timestamp):
         pass
 
-    
