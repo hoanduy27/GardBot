@@ -1,5 +1,6 @@
 package com.example.gardbot.auth
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +17,9 @@ import com.example.gardbot.dashboard.DashboardActivity
 import com.example.gardbot.databinding.FragmentLoginBinding
 import com.google.firebase.database.*
 import com.example.gardbot.model.Session
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -24,7 +28,7 @@ class Login : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private lateinit var database: DatabaseReference
-
+    private lateinit var auth: FirebaseAuth
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -76,24 +80,43 @@ class Login : Fragment() {
     private fun validateLogin(){
         val username = binding.txtboxUsername.text.toString()
         val password = binding.txtboxPassword.text.toString()
+        if(username.length == 0 || password.length == 0){
+            Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show()
+            return;
+        }
+        auth = Firebase.auth
         database.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                var stringToast = if(snapshot.hasChild(username)){
+                if(snapshot.hasChild(username)){
                     if(isPasswordMatches(snapshot.child(username), password)){
-                        Session.username = username
-                        "Đăng nhập thành công"
+                        val email = snapshot.child(username).child("email").value.toString()
+                        auth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    if(auth.currentUser!!.isEmailVerified) {
+                                        Session.username = username
+                                        Toast.makeText(context, "Đăng nhập thành công", Toast.LENGTH_SHORT).show()
+                                        val intent = Intent(activity, DashboardActivity::class.java)
+                                        startActivity(intent)
+                                    }else{
+                                        Toast.makeText(context, "Vui lòng xác thực email", Toast.LENGTH_SHORT).show()
+                                    }
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "signInWithEmail:success")
+
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "signInWithEmail:failure", task.exception)
+                                    Toast.makeText(context, "Cơ sở dữ liệu bị lỗi", Toast.LENGTH_SHORT).show()
+                                }
+                            }
                     }
                     else{
-                        "Sai mật khẩu"
+                        Toast.makeText(context, "Sai mật khẩu", Toast.LENGTH_SHORT).show()
                     }
                 }
                 else{
-                    "Tài khoản không tồn tại"
-                }
-                Toast.makeText(context, stringToast, Toast.LENGTH_SHORT).show()
-                if(stringToast == "Đăng nhập thành công"){
-                    val intent = Intent(activity, DashboardActivity::class.java)
-                    startActivity(intent)
+                    Toast.makeText(context, "Tài khoản không tồn tại", Toast.LENGTH_SHORT).show()
                 }
             }
 
