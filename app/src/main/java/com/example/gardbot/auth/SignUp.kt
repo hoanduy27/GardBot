@@ -22,7 +22,8 @@ import com.google.firebase.ktx.Firebase
 class SignUp : Fragment() {
 
     private var _binding: FragmentSignupBinding? = null
-    private lateinit var database: DatabaseReference
+    private lateinit var userDatabase: DatabaseReference
+    private lateinit var sysDatabase: DatabaseReference
     private  lateinit var usr: User
     private lateinit var auth: FirebaseAuth
     // This property is only valid between onCreateView and
@@ -38,7 +39,8 @@ class SignUp : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        database = FirebaseDatabase.getInstance().getReference("user")
+        userDatabase = FirebaseDatabase.getInstance().getReference("user")
+        sysDatabase = FirebaseDatabase.getInstance().getReference("wateringSystem").child("ws0001").child("operator")
         binding.btnLogin.setOnClickListener{
             validateSignUp()
         }
@@ -55,7 +57,7 @@ class SignUp : Fragment() {
         val fName = binding.txtboxFname.text.toString()
         val confirmPassword = binding.txtboxRePassword.text.toString()
         val phNbr = binding.txtboxPhoneNum.text.toString()
-        database.addValueEventListener(object : ValueEventListener {
+        userDatabase.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 var check = ""
                 if (username != "" && password != "" && email != "" &&
@@ -101,7 +103,8 @@ class SignUp : Fragment() {
                         task -> if (task.isSuccessful) {
                             Log.d(TAG, "Email sent.")
                         usr =  User(email,fName,lName,password,phNbr)
-                        database.child(username).setValue(usr)
+                        userDatabase.child(username).setValue(usr)
+                        sysDatabase.child(username).setValue("0")
                         Toast.makeText(context, "Đăng kí thành công. Vui lòng xác nhận email để hoàn tất.", Toast.LENGTH_SHORT).show()
                         val intent = Intent(context, AuthActivity::class.java)
                         startActivity(intent)
