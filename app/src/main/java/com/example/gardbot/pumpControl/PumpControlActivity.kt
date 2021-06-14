@@ -41,6 +41,7 @@ class PumpControlActivity : AppCompatActivity() {
         binding.agreeButton.setOnClickListener(View.OnClickListener {
             val pRef = database.reference
             var position=0;
+
             while (position < pumpControlList.size)
             {
                 var tempValue = adapter.getItem(position)

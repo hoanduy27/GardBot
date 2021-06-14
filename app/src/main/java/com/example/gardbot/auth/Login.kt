@@ -58,11 +58,6 @@ class Login : Fragment() {
             validateLogin()
             //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
-        binding.btnDemo.setOnClickListener(){
-            startActivity(
-                Intent(activity, DemoActivity::class.java)
-            )
-        }
         binding.txtNoaccount.setOnClickListener{
             Log.e("CurrentFragment", this.toString())
             /*findNavController().navigate(R.id.action_login_to_signup)*/

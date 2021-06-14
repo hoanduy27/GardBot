@@ -1,11 +1,11 @@
 import sys
 import json
+import random
 from random import randint
 import yaml
 import time
 from Adafruit_IO import MQTTClient, Client
 from threading import Thread
-
 
 class RandomPublisher:
     """
@@ -29,7 +29,7 @@ class RandomPublisher:
         self.tempHumid = {key: None for key in tempHumid}
 
         self.publish_loop = Thread(target=self.publish_random)
-        self.publish_loop.daemon = True
+        self.publish_loop.daemon = False
 
         def connected(client):
             test_feeds = list(self.pump.keys()) + list(self.sensor.keys()) + list(self.tempHumid.keys())
@@ -68,11 +68,16 @@ class RandomPublisher:
     def send_feed_data(self, feed_id, value):
         self.client.publish(feed_id, value)
 
+    def random_moisture(self, low, high):
+        rd_group = randint(0,2)
+        moisture_range = {0: [0, low], 1:[low+1, high-1], 2: [high, 1023]}
+        return randint(moisture_range[rd_group][0], moisture_range[rd_group][1])
+
     def publish_random(self):
         while True:
             time.sleep(self.POOL_TIME)
             for feed_id in self.sensor.keys():
-                random_val = randint(0, 1023)
+                random_val = self.random_moisture(100, 500)
                 
                 value = {
                     "id": "9", 
