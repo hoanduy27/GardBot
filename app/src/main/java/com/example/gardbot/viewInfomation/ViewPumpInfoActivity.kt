@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.ListView
 import com.example.gardbot.Adapter.CustomPumpInfoAdapter
 import com.example.gardbot.adapters.CustomSoilDetailAdapter
-import com.example.gardbot.Model.Pump
+import com.example.gardbot.model.Pump
 import com.example.gardbot.model.SoilHistory
 import com.example.gardbot.model.SoilSensor
 import com.example.gardbot.R
