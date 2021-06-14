@@ -1,6 +1,7 @@
 package com.example.gardbot.pumpControl
 
 import android.R.attr.button
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -10,6 +11,7 @@ import com.example.gardbot.RetrofitClient
 import com.example.gardbot.adapters.*
 import com.example.gardbot.dashboard.SystemActivity
 import com.example.gardbot.databinding.ActivityControlpumpBinding
+import com.example.gardbot.history.HistorySelectPumpActivity
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -30,14 +32,16 @@ class PumpControlActivity : AppCompatActivity() {
         sysID = intent.getStringExtra("sysID")!!
         binding = ActivityControlpumpBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //Init data
-        init()
         //Do data
+        var retrofitClient = RetrofitClient()
+        retrofitClient.getClient(retrofitClient.getLocalHostUrl())
 
         adapter = PumpControlBoxAdapter(pumpControlList, this)
         binding.pCL.adapter= adapter
-        var retrofitClient = RetrofitClient()
-        retrofitClient.getClient(retrofitClient.getLocalHostUrl())
+
+        //Fill adapter
+        addPumpControlList()
+
         binding.agreeButton.setOnClickListener(View.OnClickListener {
             val pRef = database.reference
             var position=0;
@@ -53,10 +57,13 @@ class PumpControlActivity : AppCompatActivity() {
                 }
                 position++;
             }
+            intent = Intent(this, HistorySelectPumpActivity::class.java)
+            intent.putExtra("sysID", sysID)
+            startActivity(intent)
         })
     }
 
-    private fun init(){
+    private fun addPumpControlList(){
         val mRef = database.reference
         mRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -65,15 +72,17 @@ class PumpControlActivity : AppCompatActivity() {
                 for(pump in pumpSnapshot.children) {
                     val pumpID=pump.key.toString();
                     val soilID = pump.child("soilMoistureID").value.toString()
-                    val pumpName = pump.child("name").value.toString()
-                    val auto = pump.child("auto").value.toString()
-                    val waterLevel=pump.child("waterLevel").value.toString()
-                    val sensorName = soilSnapshot.child(soilID).child("name").value.toString()
-                    val moisture = soilSnapshot.child(soilID).child("moisture").value.toString()
-                    pumpControlList.add(PumpControlBox(pumpName, sensorName, moisture,auto,waterLevel,pumpID))
-                    adapter.notifyDataSetChanged()
+                    if(soilSnapshot.child(soilID).child("sysID").value.toString() == sysID){
+                        val pumpName = pump.child("name").value.toString()
+                        val auto = pump.child("auto").value.toString()
+                        val waterLevel=pump.child("waterLevel").value.toString()
+                        val sensorName = soilSnapshot.child(soilID).child("name").value.toString()
+                        val moisture = soilSnapshot.child(soilID).child("moisture").value.toString()
+                        pumpControlList.add(PumpControlBox(pumpName, sensorName, moisture,auto,waterLevel,pumpID))
+                        adapter.notifyDataSetChanged()
+                    }
                 }
-                adapter.notifyDataSetChanged()
+
             }
 
             override fun onCancelled(error: DatabaseError) {

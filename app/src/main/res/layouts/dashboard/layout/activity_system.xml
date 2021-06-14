@@ -18,14 +18,6 @@
         android:textSize="35dp"
         android:textColor="@color/black"
         />
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/autoToggler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Auto"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        />
     <GridView
         android:id="@+id/funcList"
         android:layout_width="match_parent"

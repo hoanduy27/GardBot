@@ -37,7 +37,7 @@
             <TextView
                 android:layout_width="64dp"
                 android:layout_height="30dp"
-                android:text="Tự động"
+                android:text="Auto"
                 android:textSize="16sp"
                 android:layout_marginTop="5dp"
                 android:textStyle="bold" />
