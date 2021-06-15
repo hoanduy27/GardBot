@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="buttonBackground">#BBDEFB</color>
     <color name="disabled">#CCCCCC</color>
+    <color name="transBackground">#99000000</color>
 </resources>

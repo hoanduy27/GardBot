@@ -71,19 +71,19 @@
             android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="pump1" />
+            android:text="p0001" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="pump2" />
+            android:text="p0002" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="pump3" />
+            android:text="p0003" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

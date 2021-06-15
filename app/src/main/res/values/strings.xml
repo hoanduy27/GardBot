@@ -19,11 +19,7 @@
     <string name="txtbox_phoneNum">Số điện thoại</string>
     <string name="btn_signup">Đăng ký</string>
     <string name="btn_cancel">Hủy</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="txt_noaccount">Chưa có tài khoản? Đăng ký mới!</string>
-    <!-- Strings used for fragments for navigation -->
-
+    <string name="txt_noaccount">Chưa có tài khoản? <u>Đăng ký mới!</u></string>
     <string name="viewDetail"><u>Xem chi tiết</u></string>
     <string name="viewInfo">Xem thông tin</string>
     <string name="activePump">Số máy bơm đang hoạt động</string>

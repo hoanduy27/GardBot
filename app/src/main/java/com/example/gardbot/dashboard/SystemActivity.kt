@@ -21,6 +21,7 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.example.gardbot.model.Session
+import com.example.gardbot.pumpControl.PumpControlActivity
 
 class SystemActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySystemBinding
@@ -44,22 +45,15 @@ class SystemActivity : AppCompatActivity() {
         addBasicFunc()
         adapter.notifyDataSetChanged()
         addOperatorManagerFunction(mRef)
-        setupToggler(mRef)
 
-        //Event handlers
-        binding.autoToggler.setOnCheckedChangeListener { buttonView, isChecked ->
-            mRef.child(sysID!!).child("autoStatus").setValue(when{
-                isChecked -> "1"
-                else -> "0"
-            })
-        }
         binding.funcList.setOnItemClickListener { parent, view : View, position, id : Long->
             if(id == 0L){
                 intent = Intent(this, ViewInfomationActivity::class.java)
                 startActivity(intent)
             }
             else if(id == 1L) {
-                intent = Intent(this, ActivityPump::class.java)
+                intent = Intent(this, PumpControlActivity::class.java)
+                intent.putExtra("sysID", sysID)
                 startActivity(intent)
             }
 
@@ -124,19 +118,5 @@ class SystemActivity : AppCompatActivity() {
             }
         })
     }
-
-    fun setupToggler(mRef : DatabaseReference){
-        //var sysID = intent.getStringExtra("sysID")
-        mRef.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                binding.autoToggler.isChecked = snapshot.child(sysID!!).child("autoStatus").value.toString() == "1"
-
-            }
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-        })
-    }
-
 
 }

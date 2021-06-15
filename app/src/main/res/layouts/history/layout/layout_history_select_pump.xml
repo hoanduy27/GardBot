@@ -6,10 +6,18 @@
     android:orientation="vertical"
     android:padding="10dp"
     android:layout_weight="0.5">
-
+    android:layout_height="wrap_content">
     <TextView
-        android:drawableRight="@drawable/ic_auto"
-        android:id="@+id/history_text"
+        android:id="@+id/history_Sensor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Information"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:background = "@drawable/rounded_border"/>
+    <TextView
+        android:id = "@+id/history_pump"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Information"
@@ -18,4 +26,3 @@
         android:textSize="20sp"
         android:background = "@drawable/rounded_border"/>
 </RelativeLayout>
-
