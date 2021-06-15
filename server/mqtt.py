@@ -52,27 +52,29 @@ class MQTT:
             'owner': username, 
             'value': None, 
             'sysID': sensors['soilMoisture'][key]['sysID'],
-            'counter': 0
+            'check': False
         } for key in sensor}
         
         self.sensor.update({sensor_bbc['feedId']: {
             'owner': sensor_bbc['IO_OWNER'], 
             'value': None,
             'sysID': sensors['soilMoisture'][sensor_bbc['feedId']]['sysID'], 
-            'counter': 0
+            'check': False
         }})
 
         self.tempHumid = {key: {
             'owner': username, 
             'temp': None, 
             'humid': None,
-            'sysID': sensors['dht'][key]['sysID']
+            'sysID': sensors['dht'][key]['sysID'],
+            'check': False
         } for key in tempHumid}
         self.tempHumid.update({tempHumid_bbc['feedId']: {
             'owner': tempHumid_bbc['IO_OWNER'], 
             'temp': None, 
             'humid': None,
-            'sysID': sensors['dht'][tempHumid_bbc['feedId']]['sysID']
+            'sysID': sensors['dht'][tempHumid_bbc['feedId']]['sysID'],
+            'check': False
         }})
 
         self.writeHistory_loop = Thread(target=self.writeSensorHistory)
@@ -161,25 +163,38 @@ class MQTT:
                 self.sensor[feed_id]['value'] = value
                 self.logApp.changeSoilMoisute(feed_id, value)
                 
-                self.sensor[feed_id]['counter'] += 1
-                # Predict if counter = 2
-                if(self.sensor[feed_id]['counter'] == 2):
-                    self.changeWaterlevel(feed_id)
-                    self.sensor[feed_id]['counter'] = 0
-                self.sensorSendingCheck = True
+                self.sensor[feed_id]['check'] = True
+                # Predict if temphumid check = True
+                tempHumid_list = self.getTempHumidSensor(feed_id)
+                start = time.time()
+                while True:
+                    check = False
+                    for tempHumid_id in tempHumid_list:
+                        if self.tempHumid[tempHumid_id]['check'] == True or time.time()-start > 5:
+                            check = True
+                            break
+                    if check == True:
+                        break
+                if time.time()-start > 5:
+                    self.sensor[feed_id]['check'] = False
+                    self.stopAutoPumps(feed_id)
+                    return
+                self.changeWaterlevel(feed_id)
+                time.sleep(30)
+                self.sensor[feed_id]['check'] = False
+                time.sleep(30)
+                if self.sensor[feed_id]['check'] == False:
+                    self.stopAutoPumps(feed_id)
             
             elif(feed_id in self.tempHumid):
                 value = value.split('-')
                 self.tempHumid[feed_id]['temp'] = value[0]
                 self.tempHumid[feed_id]['humid'] = value[1]
                 self.logApp.changeTempHumid(feed_id, value[0], value[1])  
-                # Predict for sensor that has counter = 2
-                for sensor_id in self.getSoilSensor(feed_id):
-                    self.sensor[sensor_id]['counter'] += 1
-                    if(self.sensor[sensor_id]['counter'] == 2):
-                        self.changeWaterlevel(sensor_id)
-                        self.sensor[sensor_id]['counter'] = 0
-                self.sensorSendingCheck = True       
+                # change check var
+                self.tempHumid[feed_id]['check'] = True
+                time.sleep(30)
+                self.tempHumid[feed_id]['check'] = False
 
             # Depends on json format
             print('Feed {0} received new value: {1}'.format(feed_id, value))
@@ -249,6 +264,18 @@ class MQTT:
                         "unit": ""
                     })
                     self.send_feed_data(pump_id,value)
+
+    def stopAutoPumps(self, sensor_id):
+        pumps = self.logApp.getPumpBySoilMoistureID(sensor_id)
+        for pump_id, pump_status in pumps.items():
+            if pump_status['auto'] == '1' and pump_status['waterLevel'] == '1':
+                value = json.dumps({
+                "id": "11", 
+                    "name": "RELAY", 
+                    "data": "0",
+                    "unit": ""
+                })
+                self.send_feed_data(pump_id,value)
 
     # def autoWatering(self):
     #     while True:
