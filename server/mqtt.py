@@ -50,26 +50,28 @@ class MQTT:
 
         self.sensor = {key: {
             'owner': username, 
-            'value': self.logApp.getSoilMoistureValue(key), 
-            'sysID': sensors['soilMoisture'][key]['sysID']
+            'value': None, 
+            'sysID': sensors['soilMoisture'][key]['sysID'],
+            'counter': 0
         } for key in sensor}
         
         self.sensor.update({sensor_bbc['feedId']: {
             'owner': sensor_bbc['IO_OWNER'], 
-            'value': self.logApp.getSoilMoistureValue(sensor_bbc['feedId']),
-            'sysID': sensors['soilMoisture'][sensor_bbc['feedId']]['sysID']
+            'value': None,
+            'sysID': sensors['soilMoisture'][sensor_bbc['feedId']]['sysID'], 
+            'counter': 0
         }})
 
         self.tempHumid = {key: {
             'owner': username, 
-            'temp': self.logApp.getTempValue(key), 
-            'humid': self.logApp.getHumidValue(key),
+            'temp': None, 
+            'humid': None,
             'sysID': sensors['dht'][key]['sysID']
         } for key in tempHumid}
         self.tempHumid.update({tempHumid_bbc['feedId']: {
             'owner': tempHumid_bbc['IO_OWNER'], 
-            'temp': self.logApp.getTempValue(tempHumid_bbc['feedId']), 
-            'humid': self.logApp.getHumidValue(tempHumid_bbc['feedId']),
+            'temp': None, 
+            'humid': None,
             'sysID': sensors['dht'][tempHumid_bbc['feedId']]['sysID']
         }})
 
@@ -158,7 +160,12 @@ class MQTT:
             elif(feed_id in self.sensor):   
                 self.sensor[feed_id]['value'] = value
                 self.logApp.changeSoilMoisute(feed_id, value)
-                self.changeWaterlevel(feed_id)
+                
+                self.sensor[feed_id]['counter'] += 1
+                # Predict if counter = 2
+                if(self.sensor[feed_id]['counter'] == 2):
+                    self.changeWaterlevel(feed_id)
+                    self.sensor[feed_id]['counter'] = 0
                 self.sensorSendingCheck = True
             
             elif(feed_id in self.tempHumid):
@@ -166,8 +173,12 @@ class MQTT:
                 self.tempHumid[feed_id]['temp'] = value[0]
                 self.tempHumid[feed_id]['humid'] = value[1]
                 self.logApp.changeTempHumid(feed_id, value[0], value[1])  
-                # for sensor_id in self.getSoilSensor(feed_id):
-                #     self.changeWaterlevel(sensor_id)   
+                # Predict for sensor that has counter = 2
+                for sensor_id in self.getSoilSensor(feed_id):
+                    self.sensor[sensor_id]['counter'] += 1
+                    if(self.sensor[sensor_id]['counter'] == 2):
+                        self.changeWaterlevel(sensor_id)
+                        self.sensor[sensor_id]['counter'] = 0
                 self.sensorSendingCheck = True       
 
             # Depends on json format
