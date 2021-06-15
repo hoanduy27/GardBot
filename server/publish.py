@@ -29,7 +29,7 @@ class RandomPublisher:
         self.tempHumid = {key: None for key in tempHumid}
 
         self.publish_loop = Thread(target=self.publish_random)
-        self.publish_loop.daemon = True
+        self.publish_loop.daemon = False
 
         def connected(client):
             test_feeds = list(self.pump.keys()) + list(self.sensor.keys()) + list(self.tempHumid.keys())
