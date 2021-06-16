@@ -13,6 +13,7 @@ from predict.PredictionModel import PredictionModel
 class MQTT:
     def __init__(self):
         self.POOL_TIME = 20
+        self.WAIT_FOR_PREDICTION = 1
         self.TIME_FORMAT = "%d-%m-%Y-%H:%M:%S"
 
         cur_dir = os.path.abspath(__file__)
@@ -53,6 +54,7 @@ class MQTT:
             'value': None, 
             'sysID': sensors['soilMoisture'][key]['sysID'],
             'counter': 0
+            
         } for key in sensor}
         
         self.sensor.update({sensor_bbc['feedId']: {
@@ -72,7 +74,8 @@ class MQTT:
             'owner': tempHumid_bbc['IO_OWNER'], 
             'temp': None, 
             'humid': None,
-            'sysID': sensors['dht'][tempHumid_bbc['feedId']]['sysID']
+            'sysID': sensors['dht'][tempHumid_bbc['feedId']]['sysID'],
+            'newValue': False
         }})
 
         self.writeHistory_loop = Thread(target=self.writeSensorHistory)
@@ -161,11 +164,14 @@ class MQTT:
                 self.sensor[feed_id]['value'] = value
                 self.logApp.changeSoilMoisute(feed_id, value)
                 
-                self.sensor[feed_id]['counter'] += 1
+                # self.sensor[feed_id]['counter'] += 1
                 # Predict if counter = 2
-                if(self.sensor[feed_id]['counter'] == 2):
-                    self.changeWaterlevel(feed_id)
-                    self.sensor[feed_id]['counter'] = 0
+                time.sleep(self.WAIT_FOR_PREDICTION)
+                self.changeWaterlevel(feed_id)
+
+                # if(self.sensor[feed_id]['counter'] == 2):
+                #     self.changeWaterlevel(feed_id)
+                #     self.sensor[feed_id]['counter'] = 0
                 self.sensorSendingCheck = True
             
             elif(feed_id in self.tempHumid):
@@ -174,11 +180,11 @@ class MQTT:
                 self.tempHumid[feed_id]['humid'] = value[1]
                 self.logApp.changeTempHumid(feed_id, value[0], value[1])  
                 # Predict for sensor that has counter = 2
-                for sensor_id in self.getSoilSensor(feed_id):
-                    self.sensor[sensor_id]['counter'] += 1
-                    if(self.sensor[sensor_id]['counter'] == 2):
-                        self.changeWaterlevel(sensor_id)
-                        self.sensor[sensor_id]['counter'] = 0
+                # for sensor_id in self.getSoilSensor(feed_id):
+                #     self.sensor[sensor_id]['counter'] += 1
+                #     if(self.sensor[sensor_id]['counter'] == 2):
+                #         self.changeWaterlevel(sensor_id)
+                #         self.sensor[sensor_id]['counter'] = 0
                 self.sensorSendingCheck = True       
 
             # Depends on json format
@@ -230,6 +236,7 @@ class MQTT:
 
     def changeWaterlevel(self, sensor_id):
         pumps = self.logApp.getPumpBySoilMoistureID(sensor_id)
+        print(f'**************predict {sensor_id}********************')
         for pump_id, pump_status in pumps.items():
             if pump_status['auto'] == '1':
                 moisture = int(self.sensor[pump_status['soilMoistureID']]['value'])
