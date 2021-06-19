@@ -6,11 +6,11 @@ import os
 class LogApp:
     def __init__(self):
         self.TIME_FORMAT = "%d-%m-%Y-%H:%M:%S"
-        self.MAX_RECORD = 10
+        self.MAX_RECORD = 20
 
         cur_dir = os.path.abspath(__file__)
         cur_dir = os.path.dirname(cur_dir)
-        with open(f'{cur_dir}/config.yml') as conf:
+        with open(f'{cur_dir}/../config.yml') as conf:
             self.config = yaml.safe_load(conf)['firebase']
         
         self.app = pyrebase.initialize_app(self.config)
@@ -60,19 +60,19 @@ class LogApp:
         json_data = {'value' : value}
         self.db.child(f'{path}/{timestamp}').set(json_data)
 
-    # def deleteLastHistoryRecord(self, collection, feed_id):
-    #     path = f'history/{collection}/{feed_id}/'
-    #     key = self.lastHistoryRecord(collection, feed_id)
-    #     self.db.child(path).child(key).remove()
+    def deleteLastHistoryRecord(self, collection, feed_id):
+        path = f'history/{collection}/{feed_id}/'
+        key = self.lastHistoryRecord(collection, feed_id)
+        self.db.child(path).child(key).remove()
     
-    # def lastHistoryRecord(self, collection, feed_id):
-    #     path = f'history/{collection}/{feed_id}'
-    #     history = self.db.child(path).get().val()
-    #     time_records = list(map(lambda t_rec: \
-    #         datetime.strptime(t_rec, self.TIME_FORMAT), 
-    #         history.keys())
-    #     )
-    #     return min(time_records).strftime(self.TIME_FORMAT)
+    def lastHistoryRecord(self, collection, feed_id):
+        path = f'history/{collection}/{feed_id}'
+        history = self.db.child(path).get().val()
+        time_records = list(map(lambda t_rec: \
+            datetime.strptime(t_rec, self.TIME_FORMAT), 
+            history.keys())
+        )
+        return min(time_records).strftime(self.TIME_FORMAT)
 
     def getPumpBySoilMoistureID(self, sensor_id):
         status = self.db.child('pump').order_by_child("soilMoistureID").equal_to(sensor_id).get().val()

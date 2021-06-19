@@ -87,15 +87,15 @@ class RandomPublisher:
                 }
                 self.send_feed_data(feed_id, json.dumps(value))
 
-            for feed_id in self.tempHumid.keys():
-                random_temp = randint(10, 40)
-                random_humid = randint(0, 100)
-                value = {
-                    "id": "7", 
-                    "name": "TEMP-HUMID", 
-                    "data": f"{random_temp}-{random_humid}", 
-                    "unit": "*C-%"
-                }
-                self.send_feed_data(feed_id, json.dumps(value))
+            # for feed_id in self.tempHumid.keys():
+            #     random_temp = randint(10, 40)
+            #     random_humid = randint(0, 100)
+            #     value = {
+            #         "id": "7", 
+            #         "name": "TEMP-HUMID", 
+            #         "data": f"{random_temp}-{random_humid}", 
+            #         "unit": "*C-%"
+            #     }
+            #     self.send_feed_data(feed_id, json.dumps(value))
 
 mqtt = RandomPublisher()
