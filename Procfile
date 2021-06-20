@@ -1,1 +1,2 @@
-web: gunicorb app:server/runserver
+web: cd server
+web: gunicorn runserver:app
