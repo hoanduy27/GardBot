@@ -15,3 +15,5 @@
 local.properties
 /server/config.yml
 *.pyc
+/server/.git
+.vscode
