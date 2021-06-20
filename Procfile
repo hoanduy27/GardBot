@@ -1,1 +1,2 @@
-web: gunicorb app:server/runserver
+cd server
+python runserver.py
