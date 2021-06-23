@@ -59,7 +59,6 @@ class Login : Fragment() {
             //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
         binding.txtNoaccount.setOnClickListener{
-            Log.e("CurrentFragment", this.toString())
             /*findNavController().navigate(R.id.action_login_to_signup)*/
             findNavController().navigate(R.id.fragment_signup)
         }

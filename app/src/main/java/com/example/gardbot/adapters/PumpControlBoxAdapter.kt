@@ -28,14 +28,6 @@ data class PumpControlBoxAdapter (val boxList: ArrayList<PumpControlBox>, val ac
         return boxList.size
     }
 
-    override fun isEnabled(position: Int): Boolean {
-        return false
-    }
-
-    fun isNotEnabled(position: Int): Boolean {
-        return true
-    }
-
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view = View.inflate(activity, R.layout.singlerow, null)
         val sensorText = view.findViewById<TextView>(R.id.sensor)
@@ -61,31 +53,24 @@ data class PumpControlBoxAdapter (val boxList: ArrayList<PumpControlBox>, val ac
         if (boxList[position].auto== "1" )
         {
             autoState.isChecked=true;
-            pumpText.isClickable=isEnabled(position);
+            pumpText.isClickable=false
         }
 
         autoState.setOnClickListener(View.OnClickListener {
             val onepump=view.findViewById<LinearLayout>(R.id.onepump)
             if (autoState.isChecked) {
-                pumpText.isClickable=isEnabled(position);
-                pumpText.isChecked = false;
+                pumpText.isClickable=false
                 boxList[position].auto="1";
-                boxList[position].waterLevel="0";
             } else {
                 onepump.isClickable=true;
-                pumpText.isChecked=false;
-                boxList[position].waterLevel="0";
-                pumpText.isClickable=isNotEnabled(position);
+                pumpText.isClickable=true
                 boxList[position].auto="0";
             }
         })
 
         pumpText.setOnClickListener(View.OnClickListener {
-            val linear=view.findViewById<LinearLayout>(R.id.info)
-            if (autoState.isChecked)
-            {
-                pumpText.isChecked = false;
-                pumpText.isClickable=false;
+            if(autoState.isChecked){
+                pumpText.isClickable=false
             }
             if (pumpText.isChecked && !autoState.isChecked) {
                 boxList[position].waterLevel="1";

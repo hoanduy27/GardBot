@@ -3,6 +3,7 @@ package com.example.gardbot.pumpControl
 import android.R.attr.button
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import com.example.gardbot.adapters.*
 import com.example.gardbot.dashboard.SystemActivity
 import com.example.gardbot.databinding.ActivityControlpumpBinding
 import com.example.gardbot.history.HistorySelectPumpActivity
+import com.example.gardbot.model.Session
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -19,7 +21,6 @@ import com.google.firebase.ktx.Firebase
 
 class PumpControlActivity : AppCompatActivity() {
     private lateinit var binding: ActivityControlpumpBinding
-    private lateinit var sysID: String
     private var pumpControlList = ArrayList<PumpControlBox>()
     private lateinit var adapter : PumpControlBoxAdapter
     private val database = Firebase.database
@@ -28,16 +29,14 @@ class PumpControlActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_controlpump)
         //Load intent
-
-        sysID = intent.getStringExtra("sysID")!!
         binding = ActivityControlpumpBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //Do data
         var retrofitClient = RetrofitClient()
-        retrofitClient.getClient(retrofitClient.getLocalHostUrl())
+        retrofitClient.getClient(Session.mqttURI)
 
         adapter = PumpControlBoxAdapter(pumpControlList, this)
-        binding.pCL.adapter= adapter
+        binding.pumpControlList.adapter= adapter
 
         //Fill adapter
         addPumpControlList()
@@ -56,23 +55,25 @@ class PumpControlActivity : AppCompatActivity() {
                     retrofitClient.uploadValue(tempValue.pumpId, tempValue.waterLevel)
                 }
                 position++;
+
             }
-            intent = Intent(this, HistorySelectPumpActivity::class.java)
-            intent.putExtra("sysID", sysID)
+            intent = Intent(this, SystemActivity::class.java)
             startActivity(intent)
         })
     }
 
     private fun addPumpControlList(){
-        val mRef = database.reference
-        mRef.addValueEventListener(object : ValueEventListener{
+        database.reference.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                Log.e("chenge", "change")
+                pumpControlList.clear()
+
                 val pumpSnapshot = snapshot.child("pump")
                 val soilSnapshot = snapshot.child("sensor/soilMoisture")
                 for(pump in pumpSnapshot.children) {
                     val pumpID=pump.key.toString();
                     val soilID = pump.child("soilMoistureID").value.toString()
-                    if(soilSnapshot.child(soilID).child("sysID").value.toString() == sysID){
+                    if(soilSnapshot.child(soilID).child("sysID").value.toString() == Session.sysID){
                         val pumpName = pump.child("name").value.toString()
                         val auto = pump.child("auto").value.toString()
                         val waterLevel=pump.child("waterLevel").value.toString()

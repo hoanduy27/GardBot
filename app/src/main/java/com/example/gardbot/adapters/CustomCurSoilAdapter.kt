@@ -18,7 +18,7 @@ class CustomCurSoilAdapter(var ctx:Context, var resource : Int, var Items: Array
         val rightPart = view.findViewById<TextView>(R.id.rightPart)
 
         // set item data
-        leftPart.text = Items[position].name?.substringBefore(' ')
+        leftPart.text = Items[position].name
         rightPart.text = Items[position].moisture
 
         if (Items[position]!!.moisture!!.toInt()  < 10)

@@ -7,6 +7,7 @@ import android.widget.ListView
 import com.example.gardbot.adapters.CustomCurSoilAdapter
 import com.example.gardbot.model.SoilSensor
 import com.example.gardbot.R
+import com.example.gardbot.model.Session
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -34,10 +35,13 @@ class ViewSoilInfoActivity : AppCompatActivity() {
 
         myRef.addChildEventListener(object : ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                var cur_soil : SoilSensor = snapshot.getValue(SoilSensor::class.java)!!
-                cur_soil.key = snapshot.key
-                curSoilList.add(cur_soil)
-                adapter.notifyDataSetChanged()
+                if(snapshot.child("sysID").value.toString() == Session.sysID){
+                    var cur_soil : SoilSensor = snapshot.getValue(SoilSensor::class.java)!!
+                    cur_soil.key = snapshot.key
+                    curSoilList.add(cur_soil)
+                    adapter.notifyDataSetChanged()
+                }
+
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {

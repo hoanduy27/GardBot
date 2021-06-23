@@ -65,11 +65,27 @@
 
     <ListView
         android:id="@+id/listViewTemperatureHistory"
-        android:layout_width="409dp"
-        android:layout_height="600dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="10dp"
         android:dividerHeight="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guidelineTemp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTemperatureHistory" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTemp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chartViewTempHistory"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineTemp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

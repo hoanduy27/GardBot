@@ -46,7 +46,7 @@ class DashboardActivity : AppCompatActivity() {
         binding.sysList.setOnItemClickListener { parent, view : View, position, id : Long->
             Log.e("grid id", id.toString())
             val intent = Intent(this, SystemActivity::class.java)
-            intent.putExtra("sysID", view.findViewById<TextView>(R.id.footer).text.toString())
+            Session.sysID = view.findViewById<TextView>(R.id.footer).text.toString()
             startActivity(intent)
         }
     }

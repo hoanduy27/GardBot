@@ -1,4 +1,5 @@
 from random import randint
+from log.firebaseLog import LogApp
 
 class Predict:
     def __init__(self):
@@ -9,5 +10,7 @@ class Predict:
 
         moisture_range = {0: [0, low], 1: [low+1, high-1], 2: [high, 1023]}
         return randint(moisture_range[rd_group][0], moisture_range[rd_group][1])
-a = Predict()
-a.random_moisture(100, 500)
+a = LogApp()
+status = a.getPumpStatus('p0001')
+s = status['auto']
+print(s)

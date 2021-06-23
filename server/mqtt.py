@@ -14,7 +14,7 @@ from predict.PredictionModel import PredictionModel
 
 class MQTT:
     def __init__(self):
-        self.POOL_TIME = 20
+        self.POOL_TIME = 40
         self.INACTIVE_LIMIT = 60
         self.TIME_FORMAT = "%d-%m-%Y-%H:%M:%S"
         self.INACTIVE = -1
@@ -93,9 +93,9 @@ class MQTT:
 
         def writeWateringHistory(pump_id, waterLevel):
             # Get time
-            timestamp = datetime.now()
-            time_only = timestamp.strftime("%H:%M:%S")
-            timestamp = timestamp.strftime(self.TIME_FORMAT)
+            timestamp = int(datetime.now().timestamp())
+            # time_only = timestamp.strftime("%H:%M:%S")
+            # timestamp = timestamp.strftime(self.TIME_FORMAT)
 
             # Get sensor value
             status = self.logApp.getPumpStatus(pump_id)
@@ -109,7 +109,7 @@ class MQTT:
                 self.wateringHistory[pump_id] = {
                     'autoStart': auto,
                     'autoEnd': None,
-                    'startTime': time_only,
+                    'startTime': timestamp,
                     'endTime': None,
                     'moistureStart': moisture,
                     'moistureEnd': None,
@@ -121,7 +121,7 @@ class MQTT:
             if waterLevel == '0' and self.wateringHistory[pump_id] is not None:
                 # Update record for pump_id
                 self.wateringHistory[pump_id]['autoEnd'] = auto
-                self.wateringHistory[pump_id]['endTime'] = time_only
+                self.wateringHistory[pump_id]['endTime'] = timestamp
                 self.wateringHistory[pump_id]['moistureEnd'] = moisture
                 self.wateringHistory[pump_id]['humidityEnd'] = humid
                 self.wateringHistory[pump_id]['temperatureEnd'] = temp
@@ -256,7 +256,7 @@ class MQTT:
     def writeSensorHistory(self):
         while True:
             time.sleep(self.POOL_TIME)
-            current_time = datetime.now().strftime(self.TIME_FORMAT)
+            current_time = int(datetime.now().timestamp())
             for sensor_id in self.sensor: 
                 self.logApp.writeSensorHistory("moisture", sensor_id, self.sensor[sensor_id]['value'], current_time)
             for dht_id in self.tempHumid:

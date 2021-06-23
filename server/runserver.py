@@ -7,6 +7,7 @@ from mqtt import MQTT
 
 mqtt = MQTT()
 app = Flask(__name__)
+app.config['DEBUG']=False
 @app.route('/send_pump_signal', methods=['POST'])
 def send_pump_signal():
     value = request.form['value']

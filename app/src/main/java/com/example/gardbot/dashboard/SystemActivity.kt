@@ -28,13 +28,11 @@ class SystemActivity : AppCompatActivity() {
     private var funcList = ArrayList<Selection>()
     private lateinit var adapter : SelectionAdapter
     private val database = Firebase.database
-    private lateinit var sysID : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_system)
 
-        sysID = intent.getStringExtra("sysID")!!
         binding = ActivitySystemBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val mRef = database.getReference().child("wateringSystem")
@@ -53,13 +51,11 @@ class SystemActivity : AppCompatActivity() {
             }
             else if(id == 1L) {
                 intent = Intent(this, PumpControlActivity::class.java)
-                intent.putExtra("sysID", sysID)
                 startActivity(intent)
             }
 
             else if(id == 2L){
                 intent = Intent(this, HistorySelectPumpActivity::class.java)
-                intent.putExtra("sysID", sysID)
                 startActivity(intent)
             }
         }
@@ -101,9 +97,9 @@ class SystemActivity : AppCompatActivity() {
         //var sysID = intent.getStringExtra("sysID")
         mRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                binding.sysName.text = snapshot.child(sysID).child("name").value.toString()
+                binding.sysName.text = snapshot.child(Session.sysID).child("name").value.toString()
                 var omf = binding.funcList.getChildAt(3)
-                if(snapshot.child(sysID!!).child("operator").child(Session.username).value.toString() == "0") {
+                if(snapshot.child(Session.sysID!!).child("operator").child(Session.username).value.toString() == "0") {
                     omf.findViewById<TextView>(R.id.body).setBackgroundColor(resources.getColor(R.color.disabled))
                     omf.isClickable = false
                 }

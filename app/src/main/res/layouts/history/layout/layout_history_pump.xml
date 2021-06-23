@@ -12,7 +12,7 @@
         android:id="@+id/pump_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Information"
+        android:text="dd-mm-yyyy:HH-MM-SS"
         android:padding="10dp"
         android:textColor="@color/black"
         android:textSize="20sp"

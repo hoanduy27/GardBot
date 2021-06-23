@@ -18,6 +18,7 @@ import com.example.gardbot.auth.AuthActivity
 import com.example.gardbot.R
 import com.example.gardbot.databinding.ActivityHistoryPumpBinding
 import com.example.gardbot.model.Pump
+import com.example.gardbot.utils.DateFormatUtils
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -26,10 +27,10 @@ class HistoryPumpActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHistoryPumpBinding
 
     private var historyList = ArrayList<Box>()
+    private var timestamps = ArrayList<String>()
 
     private lateinit var adapter : BoxAdapter
     //intent data
-    private lateinit var sysID : String
     private lateinit var pumpId : String
     private lateinit var pump : Pump
     private  lateinit var sensorName: String
@@ -43,7 +44,6 @@ class HistoryPumpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //Load intent data
-        sysID = intent.getStringExtra("sysID")!!
         pumpId = intent.getStringExtra("pumpId")!!
         pump = intent.getSerializableExtra("pump") as Pump
         sensorName = intent.getStringExtra("sensorName")!!
@@ -63,8 +63,7 @@ class HistoryPumpActivity : AppCompatActivity() {
         binding.pumpHistory.setOnItemClickListener { parent, view : View, position, id : Long->
             //
             var intent = Intent(this, HistoryDetailActivity::class.java)
-            var timestamp = adapter.getItem(position)
-            intent.putExtra("timestamp", timestamp.text)
+            intent.putExtra("timestamp", timestamps[position])
             intent.putExtra("pumpId", pumpId)
             intent.putExtra("sensorName", sensorName)
             startActivity(intent)
@@ -126,11 +125,14 @@ class HistoryPumpActivity : AppCompatActivity() {
 
                 val auto_ic= if(autoStart + autoEnd > 0){R.drawable.ic_auto} else {0}
 
-                historyList.add(Box(snapshot.key.toString(), auto_ic))
+                historyList.add(Box(
+                    DateFormatUtils.datetimeFormat.format(snapshot.key!!.toLong()*1000), auto_ic))
+                timestamps.add(snapshot.key!!)
                 adapter.notifyDataSetChanged()
             }
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
                 historyList.clear()
+                timestamps.clear()
                 mRef.removeEventListener(this)
                 mRef.addChildEventListener(this)
                 adapter.notifyDataSetChanged()
@@ -138,6 +140,7 @@ class HistoryPumpActivity : AppCompatActivity() {
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
                 historyList.clear()
+                timestamps.clear()
                 mRef.removeEventListener(this)
                 mRef.addChildEventListener(this)
                 adapter.notifyDataSetChanged()

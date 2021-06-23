@@ -15,6 +15,7 @@ import com.example.gardbot.auth.AuthActivity
 import com.example.gardbot.R
 import com.example.gardbot.databinding.ActivityHistoryDetailBinding
 import com.example.gardbot.model.Pump
+import com.example.gardbot.utils.DateFormatUtils
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -22,7 +23,7 @@ import com.google.firebase.ktx.Firebase
 class HistoryDetailActivity: AppCompatActivity() {
     private lateinit var binding: ActivityHistoryDetailBinding
     //intent data
-    private lateinit var hisLine: String
+    private lateinit var timestamp: String
     private lateinit var pumpId: String
     private lateinit var sensorName: String
     //Detail data
@@ -37,7 +38,7 @@ class HistoryDetailActivity: AppCompatActivity() {
         setContentView(binding.root)
 
         //Load intent data
-        hisLine = intent.getStringExtra("timestamp")!!
+        timestamp = intent.getStringExtra("timestamp")!!
         pumpId = intent.getStringExtra("pumpId")!!
         sensorName = intent.getStringExtra("sensorName")!!
         //Detail
@@ -80,11 +81,11 @@ class HistoryDetailActivity: AppCompatActivity() {
     }*/
 
     fun addHistory(){
-        binding.historyInside.text = hisLine
+        binding.historyInside.text = DateFormatUtils.datetimeFormat.format(timestamp.toLong() * 1000)
 
     }
     fun addDetail(){
-        val mRef = database.reference.child("history/watering").child(pumpId).child(hisLine)
+        val mRef = database.reference.child("history/watering").child(pumpId).child(timestamp)
         mRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val autoStart = if(snapshot.child("autoStart").value.toString() == "1") {1} else {0}
@@ -98,10 +99,12 @@ class HistoryDetailActivity: AppCompatActivity() {
                 binding.historyInside.setCompoundDrawablesWithIntrinsicBounds(0, 0, auto_ic, 0)
 
                 binding.pumpInf.text = sensorName;
-                binding.timeStart.text = snapshot.child("startTime").value.toString();
+                binding.timeStart.text =
+                    DateFormatUtils.timeFormat.format(snapshot.child("startTime").value.toString().toLong()*1000)
                 binding.timeStart.setCompoundDrawablesWithIntrinsicBounds(0,0,autoStart_ic,0)
 
-                binding.timeEnd.text  = snapshot.child("endtime").value.toString();
+                binding.timeEnd.text  =
+                    DateFormatUtils.timeFormat.format(snapshot.child("endTime").value.toString().toLong()*1000)
                 binding.timeEnd.setCompoundDrawablesWithIntrinsicBounds(0,0,autoEnd_ic,0)
 
                 binding.airMoistureBegin.text = snapshot.child("humidityStart").value.toString();

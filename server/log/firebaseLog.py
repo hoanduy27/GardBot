@@ -49,11 +49,7 @@ class LogApp:
         records = self.db.child(path).get().val()
         if(records != None and len(records) >= self.MAX_RECORD):
             # Find last history record 
-            time_records = list(map(lambda t_rec:\
-                datetime.strptime(t_rec, self.TIME_FORMAT),
-                records.keys()
-            ))
-            last_record = min(time_records).strftime(self.TIME_FORMAT)
+            last_record = min(list(map(int, records.keys())))
             # Delete it 
             self.db.child(path).child(last_record).remove()
         # Create history 
@@ -68,11 +64,7 @@ class LogApp:
     def lastHistoryRecord(self, collection, feed_id):
         path = f'history/{collection}/{feed_id}'
         history = self.db.child(path).get().val()
-        time_records = list(map(lambda t_rec: \
-            datetime.strptime(t_rec, self.TIME_FORMAT), 
-            history.keys())
-        )
-        return min(time_records).strftime(self.TIME_FORMAT)
+        return min(list(map(int, history.keys())))
 
     def getPumpBySoilMoistureID(self, sensor_id):
         status = self.db.child('pump').order_by_child("soilMoistureID").equal_to(sensor_id).get().val()

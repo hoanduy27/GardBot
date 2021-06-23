@@ -66,11 +66,29 @@
 
     <ListView
         android:id="@+id/listViewSoilHistory"
-        android:layout_width="409dp"
-        android:layout_height="600dp"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="0dp"
         android:dividerHeight="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSoilHistory" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewSoilHistory"
+        app:layout_constraintBottom_toTopOf="@id/guidelineSoil"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineSoil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chartViewSoilHistory"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineSoil" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

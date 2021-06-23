@@ -18,6 +18,7 @@ import com.example.gardbot.R
 import com.example.gardbot.adapters.SelectPumpHistoryBox
 import com.example.gardbot.adapters.SelectPumpHistoryBoxAdapter
 import com.example.gardbot.model.Pump
+import com.example.gardbot.model.Session
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -32,8 +33,6 @@ class HistorySelectPumpActivity : AppCompatActivity() {
     private var pumpIds = ArrayList<String>()
 
     private lateinit var adapter : SelectPumpHistoryBoxAdapter
-    private lateinit var sysID : String
-    private lateinit var toSendSensorID: String
     private val database = Firebase.database
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +41,6 @@ class HistorySelectPumpActivity : AppCompatActivity() {
 
         binding = ActivityHistorySelectPumpBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        sysID = intent.getStringExtra("sysID")!!
 
         //Create Adapter
         adapter = SelectPumpHistoryBoxAdapter(pumpListView, this)
@@ -55,11 +53,10 @@ class HistorySelectPumpActivity : AppCompatActivity() {
 
         binding.pumpList.setOnItemClickListener { parent, view : View, position, id : Long->
             var intent = Intent(this, HistoryPumpActivity::class.java)
-            intent.putExtra("sysID", sysID)
             intent.putExtra("pumpId", pumpIds[id.toInt()])
             intent.putExtra("pump", pumpList[id.toInt()])
             sensorName = adapter.getItem(position).sensorName
-            intent.putExtra("sensorName",sensorName);
+            intent.putExtra("sensorName",sensorName)
             startActivity(intent)
         }
     }
@@ -103,12 +100,10 @@ class HistorySelectPumpActivity : AppCompatActivity() {
                 pumpList.clear()
                 var pumpSnapshot = snapshot.child("pump")
                 var soilSnapshot = snapshot.child("sensor/soilMoisture")
-                Log.e("pumpsnshot", pumpSnapshot.toString())
-                Log.e("soilSnapshot", soilSnapshot.toString())
                 for(pump in pumpSnapshot.children){
                     var soilID = pump.child("soilMoistureID").value.toString()
                     //If this pump is in this system
-                    if(soilSnapshot.child(soilID).child("sysID").value == sysID){
+                    if(soilSnapshot.child(soilID).child("sysID").value == Session.sysID){
                         var p = pump.getValue(Pump::class.java)
                         pumpIds.add(pump.key.toString())
                         pumpList.add(p!!)
