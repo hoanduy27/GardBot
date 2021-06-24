@@ -28,6 +28,7 @@ data class SelectionAdapter(val selection: List<Selection>, val activity: Fragme
 
         header.text = selection[position].header
         body.text = selection[position].body
+        body.setCompoundDrawablesWithIntrinsicBounds(0,selection[position].drawable,0,0)
         footer.text = selection[position].footer
 
         return view

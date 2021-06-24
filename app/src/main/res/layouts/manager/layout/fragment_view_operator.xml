@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.manager.ViewOperatorFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutViewAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guidelineViewAdmin_ViewOperator">
+
+        <TextView
+            android:id="@+id/txtViewAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Admin"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintTop_toTopOf="@id/layoutViewAdmin"
+            app:layout_constraintStart_toStartOf="@id/layoutViewAdmin"
+            app:layout_constraintEnd_toEndOf="@id/layoutViewAdmin"
+            app:layout_constraintBottom_toTopOf="@id/lstViewAdmin"/>
+
+        <ListView
+            android:id="@+id/lstViewAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/txtViewAdmin"
+            app:layout_constraintStart_toStartOf="@id/layoutViewAdmin"
+            app:layout_constraintEnd_toEndOf="@id/layoutViewAdmin"
+            app:layout_constraintBottom_toBottomOf="@id/layoutViewAdmin"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineViewAdmin_ViewOperator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutViewOperator"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/guidelineViewAdmin_ViewOperator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guidelineViewOperator_Del">
+
+        <TextView
+            android:id="@+id/txtViewOperator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Người điều khiển"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintTop_toTopOf="@id/layoutViewOperator"
+            app:layout_constraintStart_toStartOf="@id/layoutViewOperator"
+            app:layout_constraintEnd_toEndOf="@id/layoutViewOperator"
+            app:layout_constraintBottom_toTopOf="@id/lstViewOperator"/>
+
+        <ListView
+            android:id="@+id/lstViewOperator"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/txtViewOperator"
+            app:layout_constraintStart_toStartOf="@id/layoutViewOperator"
+            app:layout_constraintEnd_toEndOf="@id/layoutViewOperator"
+            app:layout_constraintBottom_toBottomOf="@id/layoutViewOperator" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineViewOperator_Del"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutDel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/guidelineViewOperator_Del"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/btnDelConfirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_border"
+            android:text="Xóa"
+            android:textSize="20sp"
+            android:layout_margin="20dp"
+            app:backgroundTint="@color/black"
+            app:layout_constraintTop_toTopOf="@id/layoutDel"
+            app:layout_constraintStart_toStartOf="@id/layoutDel"
+            app:layout_constraintEnd_toStartOf="@id/guidelineDelConfirm_DelCancel"
+            app:layout_constraintBottom_toBottomOf="@id/layoutDel"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineDelConfirm_DelCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"/>
+        <Button
+            android:id="@+id/btnDelCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_border"
+            android:text="Hủy bỏ"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_margin="20dp"
+            app:backgroundTint="@color/white"
+            app:backgroundTintMode="multiply"
+            app:layout_constraintTop_toTopOf="@id/layoutDel"
+            app:layout_constraintStart_toEndOf="@id/guidelineDelConfirm_DelCancel"
+            app:layout_constraintEnd_toEndOf="@id/layoutDel"
+            app:layout_constraintBottom_toBottomOf="@id/layoutDel"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

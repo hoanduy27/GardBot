@@ -38,7 +38,7 @@ android {
     sourceSets {
         main {
             res {
-                srcDirs 'src/main/res', 'src/main/res/layouts/login', 'src/main/res/layouts/dashboard', 'src/main/res/layouts/history', 'src/main/res/layouts/viewInfo', 'src/main/res/layouts/pumpControl'
+                srcDirs 'src/main/res', 'src/main/res/layouts/login', 'src/main/res/layouts/dashboard', 'src/main/res/layouts/history', 'src/main/res/layouts/viewInfo', 'src/main/res/layouts/pumpControl', 'src/main/res/layouts/manager'
             }
         }
     }
@@ -77,6 +77,8 @@ dependencies {
     implementation("com.android.support:multidex:1.0.3")
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

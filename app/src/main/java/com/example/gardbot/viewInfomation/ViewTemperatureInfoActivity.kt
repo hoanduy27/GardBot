@@ -63,7 +63,7 @@ class ViewTemperatureInfoActivity : AppCompatActivity() {
 
         listViewTemperatureHistory = findViewById<ListView>(R.id.listViewTemperatureHistory)
         chartViewTempHistory = findViewById<LineChart>(R.id.chartViewTempHistory)
-        adapter = CustomSoilDetailAdapter(this, R.layout.custom_simple_list_element, temperatureHistoryList)
+        adapter = CustomSoilDetailAdapter(this, R.layout.custom_simple_list_element, temperatureHistoryList, "C")
         listViewTemperatureHistory.adapter = adapter
 
         database.reference.addValueEventListener(object :

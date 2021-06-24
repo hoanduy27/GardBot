@@ -7,7 +7,7 @@
         android:color="@color/white" >
     </solid>
 
-    <!-- View border color and width -->
+<!--     View border color and width-->
     <stroke
         android:width="2dp"
         android:color="@color/black" >

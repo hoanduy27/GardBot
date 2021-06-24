@@ -11,7 +11,7 @@
         android:id="@+id/linearLayoutCurSoil"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/custom_info_element"
+        android:background="@drawable/rounded_border_green"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

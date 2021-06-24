@@ -41,8 +41,8 @@ data class PumpControlBoxAdapter (val boxList: ArrayList<PumpControlBox>, val ac
             pumpText.isChecked=true
         }
 
-        val pumpID= view.findViewById<TextView>(R.id.pumpid)
-        pumpID.text = boxList[position].pumpId;
+//        val pumpID= view.findViewById<TextView>(R.id.pumpid)
+//        pumpID.text = boxList[position].pumpId;
         val moistureText = view.findViewById<TextView>(R.id.moisture)
         moistureText.text = boxList[position].moisture
 

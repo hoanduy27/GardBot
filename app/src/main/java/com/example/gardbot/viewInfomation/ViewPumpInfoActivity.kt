@@ -3,20 +3,15 @@ package com.example.gardbot.viewInfomation
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import com.example.gardbot.Adapter.CustomPumpInfoAdapter
-import com.example.gardbot.adapters.CustomSoilDetailAdapter
 import com.example.gardbot.model.Pump
-import com.example.gardbot.model.SoilHistory
-import com.example.gardbot.model.SoilSensor
 import com.example.gardbot.R
-import com.example.gardbot.adapters.SelectPumpHistoryBox
+import com.example.gardbot.history.HistorySelectPumpActivity
 import com.example.gardbot.model.Session
 import com.example.gardbot.pumpControl.PumpControlActivity
-import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -31,6 +26,7 @@ class ViewPumpInfoActivity : AppCompatActivity() {
     lateinit var adapter : CustomPumpInfoAdapter
     lateinit var listViewPump : ListView
     lateinit var pumpSetting : ImageView
+    lateinit var viewHistory : ImageView
 
     val database = Firebase.database
     val myRef = database.reference
@@ -40,6 +36,7 @@ class ViewPumpInfoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_view_pump_info)
 
         pumpSetting = findViewById<ImageView>(R.id.imageViewSettingPump)
+        viewHistory = findViewById<ImageView>(R.id.imageViewHistory)
 
         listViewPump = findViewById<ListView>(R.id.listViewPump)
         var activePumpInfo = findViewById<TextView>(R.id.textActivePumpInfo)
@@ -108,12 +105,19 @@ class ViewPumpInfoActivity : AppCompatActivity() {
         pumpSetting.setOnClickListener{
             moveToPumpSetting();
         }
+        viewHistory.setOnClickListener{
+            moveToWateringHistory();
+        }
     }
 
     private fun moveToPumpSetting() {
         intent = Intent(this, PumpControlActivity::class.java)
 //        intent = Intent(this, ActivityPump::class.java)
 //        intent = Intent(this, PumpControlActivity::class.java)
+        startActivity(intent)
+    }
+    private fun moveToWateringHistory(){
+        intent = Intent(this, HistorySelectPumpActivity::class.java)
         startActivity(intent)
     }
 }

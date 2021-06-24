@@ -9,9 +9,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import com.example.gardbot.pumpControl.ActivityPump
+import com.example.gardbot.ui.manager.OperatorManagerActivity
 import com.example.gardbot.auth.AuthActivity
 import com.example.gardbot.R
 import com.example.gardbot.viewInfomation.ViewInfomationActivity
@@ -22,6 +21,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.example.gardbot.model.Session
 import com.example.gardbot.pumpControl.PumpControlActivity
+import com.makeramen.roundedimageview.RoundedImageView
 
 class SystemActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySystemBinding
@@ -58,6 +58,11 @@ class SystemActivity : AppCompatActivity() {
                 intent = Intent(this, HistorySelectPumpActivity::class.java)
                 startActivity(intent)
             }
+
+            else if(id == 3L){
+                intent = Intent(this, OperatorManagerActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -87,10 +92,10 @@ class SystemActivity : AppCompatActivity() {
     }
 
     fun addBasicFunc(){
-        funcList.add(Selection("", "Xem thông tin", ""))
-        funcList.add(Selection("", "Điều khiển máy bơm", ""))
-        funcList.add(Selection("", "Lịch sử", ""))
-        funcList.add(Selection("", "Quản lý người dùng", ""))
+        funcList.add(Selection("", "Trạng thái", "", R.drawable.ic_info))
+        funcList.add(Selection("", "Máy bơm", "", R.drawable.ic_pump))
+        funcList.add(Selection("", "Lịch sử", "", R.drawable.ic_history))
+        funcList.add(Selection("", "Quản lý", "", R.drawable.ic_manager))
     }
     fun addOperatorManagerFunction(mRef : DatabaseReference){
 
@@ -100,12 +105,12 @@ class SystemActivity : AppCompatActivity() {
                 binding.sysName.text = snapshot.child(Session.sysID).child("name").value.toString()
                 var omf = binding.funcList.getChildAt(3)
                 if(snapshot.child(Session.sysID!!).child("operator").child(Session.username).value.toString() == "0") {
-                    omf.findViewById<TextView>(R.id.body).setBackgroundColor(resources.getColor(R.color.disabled))
-                    omf.isClickable = false
+                    omf.findViewById<RoundedImageView>(R.id.selectionBackground).setImageResource(R.color.disabled)
+                    omf.isEnabled = false
                 }
                 else{
-                    omf.findViewById<TextView>(R.id.body).setBackgroundColor(resources.getColor(R.color.black))
-                    omf.isClickable = true
+                    omf.findViewById<RoundedImageView>(R.id.selectionBackground).setImageResource(R.color.green)
+                    omf.isEnabled = true
                 }
             }
 

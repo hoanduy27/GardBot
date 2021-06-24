@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.example.gardbot.model.SoilHistory
 import com.example.gardbot.R
 
-class CustomSoilDetailAdapter (var ctx: Context, var resource : Int, var Items: ArrayList<SoilHistory>) : ArrayAdapter<SoilHistory>(ctx, resource, Items) {
+class CustomSoilDetailAdapter (var ctx: Context, var resource : Int, var Items: ArrayList<SoilHistory>, var unit : String) : ArrayAdapter<SoilHistory>(ctx, resource, Items) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val layoutInflater : LayoutInflater = LayoutInflater.from(ctx)
         val view = layoutInflater.inflate(resource, null)
@@ -20,7 +20,7 @@ class CustomSoilDetailAdapter (var ctx: Context, var resource : Int, var Items: 
 
         // set item data
         leftPart.text = Items[position].time
-        rightPart.text = Items[position].value
+        rightPart.text = "${Items[position].value} ${this.unit}"
 
 
         if (Items[position]!!.value!!.toInt()  < 10){

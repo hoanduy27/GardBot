@@ -64,7 +64,7 @@ class ViewHumidityInfoActivity : AppCompatActivity() {
 
         listViewHumidityHistory = findViewById<ListView>(R.id.listViewHumidityHistory)
         chartViewHumidityHistory = findViewById<LineChart>(R.id.chartViewHumidHistory)
-        adapter = CustomSoilDetailAdapter(this, R.layout.custom_simple_list_element, humidityHistoryList)
+        adapter = CustomSoilDetailAdapter(this, R.layout.custom_simple_list_element, humidityHistoryList, "%")
         listViewHumidityHistory.adapter = adapter
         database.reference.addValueEventListener(object :
                 ValueEventListener {

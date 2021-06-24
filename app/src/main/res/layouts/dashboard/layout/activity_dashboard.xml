@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".dashboard.DashboardActivity">
 
     <TextView
         android:id="@+id/dashboard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:background="@drawable/bg_banner"
         android:text="Dashboard"
         android:textAlignment="center"
-        android:layout_gravity="center"
-        android:padding="100dp"
+        android:textColor="@color/white"
         android:textSize="35dp"
-        android:textColor="@color/black"
-        />
+        app:layout_constraintBottom_toTopOf="@+id/guidelineDashboard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineDashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
     <GridView
         android:id="@+id/sysList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:numColumns="2"
+        android:layout_height="0dp"
         android:horizontalSpacing="50dp"
-        android:verticalSpacing="50dp" />
-</LinearLayout>
+        android:numColumns="2"
+        android:verticalSpacing="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineDashboard" />
+</androidx.constraintlayout.widget.ConstraintLayout>

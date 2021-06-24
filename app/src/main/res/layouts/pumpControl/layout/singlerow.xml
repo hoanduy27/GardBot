@@ -85,11 +85,11 @@
                 android:text="PumpNameHere"
                 android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/pumpid"
-                android:text="pumpidhere"/>
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:id="@+id/pumpid"-->
+<!--                android:text="pumpidhere"/>-->
             <LinearLayout
                 android:id="@+id/info"
                 android:layout_width="wrap_content"

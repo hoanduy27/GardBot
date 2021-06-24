@@ -14,7 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GardBot"
         android:usesCleartextTraffic="true">
-        <activity android:name=".pumpControl.PumpControlActivity"/>
+        <activity
+            android:name=".ui.manager.OperatorManagerActivity"
+            android:label="@string/title_activity_operator_manager"
+            android:theme="@style/Theme.GardBot.NoActionBar"></activity>
+        <activity android:name=".pumpControl.PumpControlActivity" />
         <activity android:name=".dashboard.SystemActivity" />
         <activity android:name=".dashboard.DashboardActivity" />
         <activity android:name=".history.HistorySelectPumpActivity" />

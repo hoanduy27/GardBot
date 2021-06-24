@@ -16,6 +16,6 @@
         android:padding="10dp"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:background = "@drawable/rounded_border"/>
+        android:background = "@drawable/rounded_border_green"/>
 </RelativeLayout>
 

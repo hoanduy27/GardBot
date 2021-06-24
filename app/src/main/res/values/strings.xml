@@ -21,12 +21,17 @@
     <string name="btn_cancel">Hủy</string>
     <string name="txt_noaccount">Chưa có tài khoản? <u>Đăng ký mới!</u></string>
     <string name="viewDetail"><u>Xem chi tiết</u></string>
-    <string name="viewInfo">Xem thông tin</string>
+    <string name="viewInfo">Trạng thái</string>
     <string name="activePump">Số máy bơm đang hoạt động</string>
     <string name="pumpList"><u>Danh sách máy bơm</u></string>
     <string name="curSoil">Độ ẩm đất hiện tại</string>
     <string name="curHumidity">Độ ẩm không khí hiện tại</string>
     <string name="curTemperator">Nhiệt độ không khí hiện tại</string>
     <string name="recorded_history">Lịch sử ghi nhận</string>
+    <string name="title_activity_operator_manager">OperatorManagerActivity</string>
+    <string name="tab_text_1">Người điều khiển</string>
+    <string name="tab_text_2">Thêm người điều khiển</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

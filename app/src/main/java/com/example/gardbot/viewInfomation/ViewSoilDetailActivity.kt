@@ -60,7 +60,7 @@ class ViewSoilDetailActivity : AppCompatActivity() {
 
         listViewSoilHistory = findViewById<ListView>(R.id.listViewSoilHistory)
         chartViewSoilHistory = findViewById<LineChart>(R.id.chartViewSoilHistory)
-        adapter = CustomSoilDetailAdapter(this, R.layout.custom_simple_list_element, soilHistoryList)
+        adapter = CustomSoilDetailAdapter(this, R.layout.custom_simple_list_element, soilHistoryList, "%")
         listViewSoilHistory.adapter = adapter
 
         database.reference.child("sensor/soilMoisture").child(curSoil.key!!).addValueEventListener(object:ValueEventListener{

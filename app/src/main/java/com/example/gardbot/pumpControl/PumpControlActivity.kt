@@ -60,6 +60,11 @@ class PumpControlActivity : AppCompatActivity() {
             intent = Intent(this, SystemActivity::class.java)
             startActivity(intent)
         })
+
+        binding.undoButton.setOnClickListener {
+            intent = Intent(this, SystemActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun addPumpControlList(){

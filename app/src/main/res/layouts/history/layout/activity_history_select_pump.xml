@@ -1,34 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".history.HistorySelectPumpActivity">
 
     <TextView
         android:id="@+id/sysName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="Lịch sử"
+        android:background="@drawable/bg_banner"
         android:textAlignment="center"
-        android:layout_gravity="center"
-        android:padding="100dp"
-        android:textSize="35dp"
-        android:textColor="@color/black"
-        />
+        android:gravity="center"
+        android:textSize="35sp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guidelineHistory" />
     <TextView
+        android:id="@+id/txtChoosePump"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Chọn máy bơm"
         android:padding="10dp"
         android:textColor="@color/black"
-        android:textSize="30sp"/>
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@id/guidelineHistory"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
     <ListView
         android:id="@+id/pumpList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:numColumns="2"
         android:horizontalSpacing="50dp"
-        android:verticalSpacing="50dp" />
-</LinearLayout>
+        android:verticalSpacing="50dp"
+        app:layout_constraintTop_toBottomOf="@id/txtChoosePump"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
